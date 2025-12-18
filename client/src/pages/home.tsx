@@ -30,14 +30,17 @@ const stagger = {
 export default function Home() {
   const [open, setOpen] = useState(false);
   const { toast } = useToast();
-  const [scrolled, setScrolled] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: e.clientX / window.innerWidth,
+        y: e.clientY / window.innerHeight,
+      });
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -60,14 +63,14 @@ export default function Home() {
   }
 
   return (
-    <div className="bg-background text-foreground min-h-screen selection:bg-white selection:text-black">
+    <div className="bg-background text-foreground h-screen w-full overflow-hidden selection:bg-white selection:text-black relative">
       {/* Navigation */}
-      <nav className={`fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 py-6 md:px-12 transition-all duration-500 ${scrolled ? 'bg-background/80 backdrop-blur-md border-b border-border/50' : 'bg-transparent'}`}>
+      <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 py-8 md:px-12 bg-transparent mix-blend-difference text-white">
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-xl font-serif tracking-widest uppercase font-bold"
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          className="text-sm font-serif tracking-[0.2em] uppercase"
         >
           Solo Designs
         </motion.div>
@@ -75,13 +78,13 @@ export default function Home() {
         <motion.div
            initial={{ opacity: 0, x: 20 }}
            animate={{ opacity: 1, x: 0 }}
-           transition={{ duration: 0.8, ease: "easeOut" }}
+           transition={{ duration: 1.5, ease: "easeOut" }}
         >
            <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger asChild>
-                <Button variant="outline" className="rounded-none border-white/20 hover:bg-white hover:text-black transition-colors duration-500 uppercase tracking-widest text-xs h-10 px-6">
-                  Inquire
-                </Button>
+                <button className="text-[10px] uppercase tracking-[0.3em] hover:opacity-50 transition-opacity duration-500">
+                  [ Inquire ]
+                </button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-[600px] border-none shadow-2xl bg-zinc-950/95 backdrop-blur-xl text-white rounded-none p-0 overflow-hidden">
                 <div className="grid grid-cols-1 md:grid-cols-[1.5fr,2fr] h-full min-h-[500px]">
@@ -157,112 +160,64 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 pt-20 overflow-hidden">
-        {/* Abstract Background Elements */}
-        <div className="absolute top-0 right-0 w-2/3 h-full opacity-20 pointer-events-none z-0 mix-blend-screen">
-             <div className="w-full h-full bg-gradient-to-l from-white/10 to-transparent" />
-             <img src={heroImg} alt="Abstract Architecture" className="w-full h-full object-cover object-left opacity-50 grayscale contrast-125" />
-        </div>
+      <section className="relative h-full w-full flex flex-col justify-center px-6 md:px-12 overflow-hidden">
+        {/* Abstract Background Elements with Parallax */}
+        <motion.div 
+          className="absolute inset-0 z-0"
+          animate={{
+            x: mousePosition.x * -20,
+            y: mousePosition.y * -20,
+          }}
+          transition={{ type: "spring", damping: 30, stiffness: 200 }}
+        >
+             <div className="absolute inset-0 bg-black/40 z-10" />
+             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10" />
+             <img 
+               src={heroImg} 
+               alt="Abstract Architecture" 
+               className="w-[110%] h-[110%] object-cover object-center opacity-60 grayscale contrast-125 scale-110" 
+             />
+        </motion.div>
         
         <motion.div 
           variants={stagger}
           initial="hidden"
           animate="visible"
-          className="relative z-10 max-w-5xl"
+          className="relative z-20 max-w-[90vw]"
         >
           <motion.h1 
             variants={fadeInUp}
-            className="text-[10vw] leading-[0.9] font-serif font-light tracking-tight text-balance mix-blend-difference text-white"
+            className="text-[13vw] leading-[0.8] font-serif font-light tracking-tighter text-white mix-blend-overlay opacity-90"
           >
-            Build your <br />
-            <span className="italic font-normal pl-[2vw]">Digital Legacy.</span>
+            Digital <br />
+            <span className="italic font-normal pl-[4vw]">Legacy.</span>
           </motion.h1>
 
           <motion.div 
             variants={fadeInUp}
-            className="mt-12 md:mt-20 flex flex-col md:flex-row gap-8 md:items-end border-t border-white/10 pt-8"
+            className="mt-16 md:mt-24 flex flex-col md:flex-row gap-12 items-start md:items-end border-t border-white/20 pt-8 max-w-4xl"
           >
-            <p className="max-w-md text-lg md:text-xl text-zinc-400 font-light leading-relaxed">
+            <p className="text-lg md:text-xl text-zinc-300 font-light leading-relaxed max-w-lg">
               Stop explaining your value. <span className="text-white font-normal">Start showing it.</span> We craft the kind of undeniable digital presence that makes your expertise impossible to ignore.
             </p>
             
-            <div className="flex gap-4">
-              <Dialog open={open} onOpenChange={setOpen}>
-                  <DialogTrigger asChild>
-                    <Button className="rounded-none bg-white text-black hover:bg-zinc-200 h-14 px-10 text-sm uppercase tracking-widest transition-transform hover:-translate-y-1 duration-300">
-                      Book Consultation
-                    </Button>
-                  </DialogTrigger>
-              </Dialog>
-            </div>
+            <Dialog open={open} onOpenChange={setOpen}>
+                <DialogTrigger asChild>
+                  <Button className="rounded-none bg-white text-black hover:bg-zinc-200 h-16 px-12 text-sm uppercase tracking-[0.2em] transition-all duration-500 hover:tracking-[0.3em]">
+                    Book Consultation
+                  </Button>
+                </DialogTrigger>
+            </Dialog>
           </motion.div>
         </motion.div>
       </section>
 
-      {/* Selected Works Teaser */}
-      <section className="py-32 px-6 md:px-12 border-t border-white/5 bg-zinc-950">
-        <div className="max-w-7xl mx-auto">
-           <div className="flex justify-between items-end mb-16">
-              <h2 className="text-4xl md:text-6xl font-serif">Selected Works</h2>
-              <span className="hidden md:block text-zinc-500 uppercase tracking-widest text-xs">(2023 — 2025)</span>
-           </div>
-
-           <div className="space-y-0">
-              {[
-                { name: "Vanguard Architecture", cat: "Digital Identity", year: "2024" },
-                { name: "Oasis Ventures", cat: "Platform Design", year: "2024" },
-                { name: "Maison Étude", cat: "E-Commerce", year: "2023" },
-                { name: "Carbon & Co.", cat: "Portfolio", year: "2023" }
-              ].map((item, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="group relative flex items-center justify-between py-12 border-t border-white/10 hover:bg-white/5 transition-colors duration-500 cursor-pointer px-4"
-                >
-                  <h3 className="text-2xl md:text-4xl font-light group-hover:pl-4 transition-all duration-500">{item.name}</h3>
-                  <div className="flex items-center gap-8 md:gap-16 text-xs md:text-sm text-zinc-500 font-mono uppercase tracking-widest">
-                    <span className="hidden md:block">{item.cat}</span>
-                    <span>{item.year}</span>
-                    <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all duration-500" />
-                  </div>
-                </motion.div>
-              ))}
-              <div className="border-t border-white/10" />
-           </div>
-        </div>
-      </section>
-
-      {/* Statement Section */}
-      <section className="py-32 md:py-48 px-6 md:px-12 bg-white text-black text-center flex flex-col items-center justify-center">
-         <p className="text-xs uppercase tracking-[0.3em] mb-8 text-zinc-500">The Philosophy</p>
-         <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif max-w-5xl leading-tight">
-           "Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away."
-         </h2>
-         <p className="mt-8 font-sans text-zinc-500 italic">— Antoine de Saint-Exupéry</p>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-20 px-6 md:px-12 bg-black text-zinc-400 border-t border-white/10">
-         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
-            <div>
-               <h2 className="text-2xl font-serif text-white mb-2">Solo Designs</h2>
-               <p className="text-sm font-light">Based in New York City.</p>
-            </div>
-            
-            <div className="flex gap-8 text-xs uppercase tracking-widest">
-               <a href="#" className="hover:text-white transition-colors">Instagram</a>
-               <a href="#" className="hover:text-white transition-colors">Twitter</a>
-               <a href="#" className="hover:text-white transition-colors">LinkedIn</a>
-            </div>
-         </div>
-         <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between text-[10px] uppercase tracking-widest opacity-50">
-            <span>&copy; 2025 Solo Designs Inc.</span>
-            <span className="mt-2 md:mt-0">All Rights Reserved.</span>
-         </div>
-      </footer>
+      {/* Footer / Copyright - Minimal */}
+      <div className="absolute bottom-8 left-6 md:left-12 z-20 mix-blend-difference text-white">
+         <p className="text-[10px] uppercase tracking-[0.3em] opacity-50">
+           Est. 2025 — NYC / PAR / TYO
+         </p>
+      </div>
     </div>
   );
 }
