@@ -10,7 +10,6 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { ArrowRight, Menu, X } from "lucide-react";
-import heroImg from "@assets/generated_images/dark_liquid_chrome_abstract_wave.png";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -160,7 +159,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative h-full w-full flex flex-col justify-center px-6 md:px-12 overflow-hidden">
+      <section className="relative h-full w-full flex flex-col justify-center px-6 md:px-12 overflow-hidden bg-black">
         {/* Abstract Background Elements with Parallax */}
         <motion.div 
           className="absolute inset-0 z-0"
@@ -170,13 +169,12 @@ export default function Home() {
           }}
           transition={{ type: "spring", damping: 30, stiffness: 200 }}
         >
-             <div className="absolute inset-0 bg-black/40 z-10" />
-             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10" />
-             <img 
-               src={heroImg} 
-               alt="Abstract Architecture" 
-               className="w-[110%] h-[110%] object-cover object-center opacity-60 grayscale contrast-125 scale-110" 
-             />
+             {/* Deep Atmospheric Gradients */}
+             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,_#27272a_0%,_#09090b_40%,_#000000_100%)] opacity-80" />
+             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-zinc-800/20 via-transparent to-transparent" />
+             
+             {/* Subtle Noise Texture */}
+             <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay" />
         </motion.div>
         
         <motion.div 
@@ -187,17 +185,17 @@ export default function Home() {
         >
           <motion.h1 
             variants={fadeInUp}
-            className="text-[13vw] leading-[0.8] font-serif font-light tracking-tighter text-white mix-blend-overlay opacity-90"
+            className="text-[13vw] leading-[0.8] font-serif font-light tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/50"
           >
             Digital <br />
-            <span className="italic font-normal pl-[4vw]">Legacy.</span>
+            <span className="italic font-normal pl-[4vw] text-white">Legacy.</span>
           </motion.h1>
 
           <motion.div 
             variants={fadeInUp}
-            className="mt-16 md:mt-24 flex flex-col md:flex-row gap-12 items-start md:items-end border-t border-white/20 pt-8 max-w-4xl"
+            className="mt-16 md:mt-24 flex flex-col md:flex-row gap-12 items-start md:items-end border-t border-white/10 pt-8 max-w-4xl"
           >
-            <p className="text-lg md:text-xl text-zinc-300 font-light leading-relaxed max-w-lg">
+            <p className="text-lg md:text-xl text-zinc-400 font-light leading-relaxed max-w-lg">
               Stop explaining your value. <span className="text-white font-normal">Start showing it.</span> We craft the kind of undeniable digital presence that makes your expertise impossible to ignore.
             </p>
             
