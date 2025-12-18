@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Premium Font Stack */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Syne:wght@400;500;600;700;800&display=swap');
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -9,39 +12,183 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  /* World Class Theme - High Contrast Monochrome */
-  --color-background: hsl(0 0% 5%);
+  /* Refined Dark Theme */
+  --color-background: hsl(0 0% 2%);
   --color-foreground: hsl(0 0% 95%);
 
-  --color-card: hsl(0 0% 8%);
+  --color-card: hsl(0 0% 5%);
   --color-card-foreground: hsl(0 0% 95%);
 
-  --color-popover: hsl(0 0% 8%);
+  --color-popover: hsl(0 0% 5%);
   --color-popover-foreground: hsl(0 0% 95%);
 
   --color-primary: hsl(0 0% 95%);
-  --color-primary-foreground: hsl(0 0% 5%);
+  --color-primary-foreground: hsl(0 0% 2%);
 
-  --color-secondary: hsl(0 0% 15%);
+  --color-secondary: hsl(0 0% 12%);
   --color-secondary-foreground: hsl(0 0% 95%);
 
-  --color-muted: hsl(0 0% 15%);
-  --color-muted-foreground: hsl(0 0% 60%);
+  --color-muted: hsl(0 0% 12%);
+  --color-muted-foreground: hsl(0 0% 50%);
 
-  --color-accent: hsl(0 0% 20%);
-  --color-accent-foreground: hsl(0 0% 95%);
+  --color-accent: hsl(45 100% 60%);
+  --color-accent-foreground: hsl(0 0% 2%);
 
   --color-destructive: hsl(0 60% 50%);
   --color-destructive-foreground: hsl(0 0% 98%);
 
-  --color-border: hsl(0 0% 20%);
-  --color-input: hsl(0 0% 20%);
+  --color-border: hsl(0 0% 15%);
+  --color-input: hsl(0 0% 15%);
   --color-ring: hsl(0 0% 95%);
 
-  --font-sans: 'Inter', sans-serif;
-  --font-serif: 'Cormorant Garamond', serif;
+  --font-sans: 'Syne', sans-serif;
+  --font-serif: 'Instrument Serif', serif;
 
   --radius: 0rem; 
+}
+
+/* Custom Cursor */
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s ease-out, width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+  mix-blend-mode: difference;
+}
+
+.custom-cursor.hovering {
+  width: 60px;
+  height: 60px;
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.cursor-dot {
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  mix-blend-mode: difference;
+}
+
+/* Hide default cursor on interactive elements */
+body.custom-cursor-enabled {
+  cursor: none;
+}
+
+body.custom-cursor-enabled a,
+body.custom-cursor-enabled button {
+  cursor: none;
+}
+
+/* Text Shimmer Effect */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.4) 25%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(255, 255, 255, 0.4) 75%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 8s linear infinite;
+}
+
+/* Gradient Orb Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(10%, 15%) scale(1.05);
+  }
+  50% {
+    transform: translate(-5%, 10%) scale(0.95);
+  }
+  75% {
+    transform: translate(-15%, -5%) scale(1.02);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.gradient-orb {
+  animation: float 20s ease-in-out infinite, pulse-glow 8s ease-in-out infinite;
+}
+
+.gradient-orb-2 {
+  animation: float 25s ease-in-out infinite reverse, pulse-glow 10s ease-in-out infinite;
+  animation-delay: -5s;
+}
+
+.gradient-orb-3 {
+  animation: float 30s ease-in-out infinite, pulse-glow 12s ease-in-out infinite;
+  animation-delay: -10s;
+}
+
+/* Magnetic Button Effect */
+.magnetic-button {
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Line Animation */
+@keyframes line-expand {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.animated-line {
+  transform-origin: left;
+  animation: line-expand 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Split Text Character Animation */
+.split-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+/* Noise Overlay */
+.noise-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
 }
 
 @layer base {
@@ -51,6 +198,7 @@
   body {
     @apply font-sans antialiased bg-background text-foreground;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+    overflow-x: hidden;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;
@@ -62,15 +210,20 @@
     text-wrap: balance;
   }
   
-  /* Custom Scrollbar for a premium feel */
+  /* Invisible Scrollbar */
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 0px;
   }
   ::-webkit-scrollbar-track {
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: hsl(var(--muted-foreground)); 
-    border-radius: 0px;
+    background: transparent;
   }
+}
+
+/* Selection Color */
+::selection {
+  background: hsl(45, 100%, 60%);
+  color: hsl(0, 0%, 2%);
 }
