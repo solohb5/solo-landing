@@ -7,7 +7,7 @@ Open this file every time you sit down to work.
 ## Quick Start
 
 ```bash
-npm run dev        # Start dev server (port 5000)
+npm run dev        # Start dev server (port 3000)
 ```
 
 ---
@@ -43,4 +43,5 @@ Check `01-FOCUS-TODAY.md` for what we're working on.
 **One thing at a time. Finish before starting new.**
 
 This is a simple landing page. Keep it simple.
+
 

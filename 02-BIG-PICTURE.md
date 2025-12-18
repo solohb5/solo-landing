@@ -63,3 +63,4 @@ Hosting:      Replit (target)
 | Simple single-page | Don't overcomplicate — it's a landing page | Dec 2024 |
 | Dark aesthetic | Matches premium positioning | Dec 2024 |
 
+
