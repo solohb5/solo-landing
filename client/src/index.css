@@ -9,39 +9,39 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  /* Elegant Monochrome Theme */
-  --color-background: hsl(0 0% 100%);
-  --color-foreground: hsl(0 0% 10%);
+  /* World Class Theme - High Contrast Monochrome */
+  --color-background: hsl(0 0% 5%);
+  --color-foreground: hsl(0 0% 95%);
 
-  --color-card: hsl(0 0% 100%);
-  --color-card-foreground: hsl(0 0% 10%);
+  --color-card: hsl(0 0% 8%);
+  --color-card-foreground: hsl(0 0% 95%);
 
-  --color-popover: hsl(0 0% 100%);
-  --color-popover-foreground: hsl(0 0% 10%);
+  --color-popover: hsl(0 0% 8%);
+  --color-popover-foreground: hsl(0 0% 95%);
 
-  --color-primary: hsl(0 0% 9%);
-  --color-primary-foreground: hsl(0 0% 98%);
+  --color-primary: hsl(0 0% 95%);
+  --color-primary-foreground: hsl(0 0% 5%);
 
-  --color-secondary: hsl(0 0% 96%);
-  --color-secondary-foreground: hsl(0 0% 9%);
+  --color-secondary: hsl(0 0% 15%);
+  --color-secondary-foreground: hsl(0 0% 95%);
 
-  --color-muted: hsl(0 0% 96%);
-  --color-muted-foreground: hsl(0 0% 45%);
+  --color-muted: hsl(0 0% 15%);
+  --color-muted-foreground: hsl(0 0% 60%);
 
-  --color-accent: hsl(0 0% 96%);
-  --color-accent-foreground: hsl(0 0% 9%);
+  --color-accent: hsl(0 0% 20%);
+  --color-accent-foreground: hsl(0 0% 95%);
 
-  --color-destructive: hsl(0 84.2% 60.2%);
+  --color-destructive: hsl(0 60% 50%);
   --color-destructive-foreground: hsl(0 0% 98%);
 
-  --color-border: hsl(0 0% 89.8%);
-  --color-input: hsl(0 0% 89.8%);
-  --color-ring: hsl(0 0% 9%);
+  --color-border: hsl(0 0% 20%);
+  --color-input: hsl(0 0% 20%);
+  --color-ring: hsl(0 0% 95%);
 
   --font-sans: 'Inter', sans-serif;
   --font-serif: 'Cormorant Garamond', serif;
 
-  --radius: 0rem; /* Sharp edges for minimalism */
+  --radius: 0rem; 
 }
 
 @layer base {
@@ -54,5 +54,23 @@
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Custom Scrollbar for a premium feel */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground)); 
+    border-radius: 0px;
   }
 }
