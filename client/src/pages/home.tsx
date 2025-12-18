@@ -203,26 +203,26 @@ function MorphingBlob({ mouseX, mouseY, scrollProgress, isCtaHover }: { mouseX: 
   
   // Color palettes - smooth continuous transition between these
   const colorPalettes = useMemo(() => [
-    // Electric blue - trust, digital presence
+    // Deep Sapphire - authority, trust, depth
     [
-      { r: 60, g: 120, b: 255 },
-      { r: 80, g: 160, b: 255 },
-      { r: 120, g: 200, b: 255 },
-      { r: 200, g: 235, b: 255 },
+      { r: 30, g: 60, b: 120 },
+      { r: 50, g: 90, b: 160 },
+      { r: 80, g: 130, b: 200 },
+      { r: 140, g: 180, b: 230 },
     ],
-    // Teal/Cyan - direct, confident, engaging
+    // Warm Bronze/Amber - luxury, warmth, premium
     [
-      { r: 40, g: 180, b: 180 },
-      { r: 60, g: 210, b: 200 },
-      { r: 100, g: 235, b: 220 },
-      { r: 180, g: 250, b: 245 },
+      { r: 180, g: 130, b: 70 },
+      { r: 210, g: 160, b: 90 },
+      { r: 230, g: 190, b: 120 },
+      { r: 245, g: 220, b: 180 },
     ],
-    // Vibrant Green/Gold - victory, growth, celebration
+    // Deep Emerald - sophistication, growth, legacy
     [
-      { r: 80, g: 200, b: 120 },
-      { r: 120, g: 220, b: 150 },
-      { r: 170, g: 240, b: 180 },
-      { r: 220, g: 255, b: 220 },
+      { r: 30, g: 100, b: 80 },
+      { r: 50, g: 140, b: 110 },
+      { r: 80, g: 180, b: 140 },
+      { r: 150, g: 220, b: 190 },
     ],
   ], []);
   
@@ -372,7 +372,7 @@ function MorphingBlob({ mouseX, mouseY, scrollProgress, isCtaHover }: { mouseX: 
       // Draw layers
       for (let layer = 0; layer < 4; layer++) {
         const layerOffset = layer * 0.3;
-        const layerOpacity = 0.28 - layer * 0.04;
+        const layerOpacity = 0.38 - layer * 0.06;
         const layerRadius = baseRadius * (1 - layer * 0.12);
         
         ctx.beginPath();
@@ -800,7 +800,7 @@ export default function Home() {
         transition={{ duration: 0.8, delay: 1.8 }}
         className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 md:px-12 py-6 md:py-8 mix-blend-difference"
       >
-        <span className="text-[10px] tracking-[0.5em] uppercase text-white/60 font-light">
+        <span className="text-[10px] tracking-[0.5em] uppercase text-[var(--cream)] font-medium">
           Solo
         </span>
         <MagneticButton
@@ -838,14 +838,14 @@ export default function Home() {
 
               {/* Main headline - MASSIVE */}
               <div className="space-y-1 md:space-y-2">
-                <div className="overflow-hidden">
+                <div className="overflow-hidden pb-[0.15em]">
                   <motion.h1
                     initial={{ y: "110%" }}
                     animate={{ y: loaded ? 0 : "110%" }}
                     transition={{ duration: 1.4, delay: 2.1, ease: [0.16, 1, 0.3, 1] }}
-                    className="font-serif text-[10vw] md:text-[7vw] lg:text-[6vw] xl:text-[5vw] font-light leading-[1.1] tracking-[-0.02em] text-white/90"
+                    className="font-serif text-[10vw] md:text-[7vw] lg:text-[6vw] xl:text-[5vw] font-light leading-[1.15] tracking-[-0.02em] text-white/90"
                   >
-                    Let's build
+                    Your legacy.
                   </motion.h1>
                 </div>
                 <div className="overflow-hidden pb-[0.15em]">
@@ -853,9 +853,9 @@ export default function Home() {
                     initial={{ y: "110%" }}
                     animate={{ y: loaded ? 0 : "110%" }}
                     transition={{ duration: 1.4, delay: 2.25, ease: [0.16, 1, 0.3, 1] }}
-                    className="font-serif text-[10vw] md:text-[7vw] lg:text-[6vw] xl:text-[5vw] font-light leading-[1.1] tracking-[-0.02em] italic text-[var(--cream)]"
+                    className="font-serif text-[10vw] md:text-[7vw] lg:text-[6vw] xl:text-[5vw] font-light leading-[1.15] tracking-[-0.02em] italic text-[var(--cream)]"
                   >
-                    your digital legacy.
+                    In pixels.
                   </motion.h1>
                 </div>
               </div>
@@ -869,8 +869,8 @@ export default function Home() {
               transition={{ duration: 1, delay: 2.8 }}
             >
               <p className="text-[13px] md:text-[14px] text-white/30 font-light leading-[1.9] mb-10 max-w-sm">
-                We interview you. Learn your story. Translate it into every pixel. 
-                For those who refuse to blend in.
+                We interview you. Then design your brand, write your copy, and build 
+                the entire website—all from one conversation. No templates. Just you.
               </p>
               
               <div className="flex flex-wrap items-center gap-6">
@@ -949,19 +949,19 @@ export default function Home() {
               { 
                 num: "01", 
                 word: "Interview", 
-                line: "We don't start with wireframes. We start with questions. Your story becomes our blueprint.",
+                line: "One conversation. We learn your story, your voice, how you want to be seen. This becomes the foundation for everything.",
                 align: "col-span-12 md:col-span-4 md:col-start-1"
               },
               { 
                 num: "02", 
-                word: "Design", 
-                line: "Every color, every curve, every word—chosen to reflect who you are, not who the template says you should be.",
+                word: "Create", 
+                line: "Brand identity. Logo. Copy. Website. All designed from your interview—every word and pixel reflects you.",
                 align: "col-span-12 md:col-span-4 md:col-start-5 md:mt-32"
               },
               { 
                 num: "03", 
                 word: "Launch", 
-                line: "Two weeks. A site that makes people pause. That's the promise.",
+                line: "Two weeks. A complete digital presence that makes people stop and take notice.",
                 align: "col-span-12 md:col-span-4 md:col-start-9 md:mt-64"
               },
             ].map((item, i) => (
@@ -1018,7 +1018,7 @@ export default function Home() {
                   delay={0.3}
                   stagger={0.02}
                 >
-                  We don't make websites.
+                  Brand. Copy. Website.
                 </SplitText>
                 <div className="h-4 md:h-6" />
                 <SplitText 
@@ -1026,7 +1026,7 @@ export default function Home() {
                   delay={0.8}
                   stagger={0.02}
                 >
-                  We create digital legacies.
+                  All from one interview.
                 </SplitText>
               </div>
             </div>
@@ -1041,7 +1041,7 @@ export default function Home() {
             >
               <span className="w-12 h-[1px] bg-white/10" />
               <span className="text-[11px] tracking-[0.3em] uppercase text-white/20 font-light">
-                Solo Design Philosophy
+                The Solo Promise
               </span>
             </motion.div>
           </div>
@@ -1088,8 +1088,8 @@ export default function Home() {
                   viewport={{ once: true }}
                 >
                   <p className="text-[14px] text-white/30 font-light leading-[1.9] mb-10">
-                    15 minutes. No pitch. Just a conversation about your story 
-                    and whether we're the right fit to tell it.
+                    You liked what you saw. Let's talk about creating something 
+                    even better for you. 15 minutes. No pitch. Just possibilities.
                   </p>
                   
                   <div className="flex flex-wrap items-center gap-4">
@@ -1139,7 +1139,7 @@ export default function Home() {
             Solo Designs
           </span>
           <span className="text-[11px] text-white/10 font-light italic">
-            For those who refuse to blend in.
+            Your story, translated.
           </span>
           <span className="text-[10px] text-white/10 font-light">
             © {new Date().getFullYear()}
@@ -1254,7 +1254,7 @@ export default function Home() {
                             <FormItem>
                               <FormControl>
                                 <Textarea
-                                  placeholder="What's your story?"
+                                  placeholder="What are you looking to create?"
                                   {...field}
                                   className="bg-transparent border-0 border-b border-white/10 rounded-none px-0 py-5 focus-visible:ring-0 focus-visible:border-[var(--cream)]/50 placeholder:text-white/20 min-h-[120px] resize-none text-[16px] font-light transition-colors duration-500"
                                 />
