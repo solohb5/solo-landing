@@ -4,16 +4,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Solo Canvas is a premium landing page for Solo Designs, a design studio. It's a single-page React application with an Express backend, featuring a booking form that submits to Formspree.
+Solo Canvas is a premium landing page for Solo Designs, a high-end design studio. It's a single-page React application featuring a stunning morphing blob as the visual centerpiece. Visitors arrive from "BY SOLO DESIGNS" links in client site footers (e.g., theedgeofhonor.com).
 
 ## Commands
 
 ```bash
-npm run dev          # Start dev server (port 5000) - serves both API and client
+npm run dev          # Start dev server (port 3000) - serves both API and client
 npm run build        # Production build (Vite client + esbuild server)
 npm run build:vercel # Vercel-specific build (client only)
 npm run check        # TypeScript type checking
-npm run db:push      # Push Drizzle schema to database
 ```
 
 ## Architecture
@@ -22,6 +21,7 @@ npm run db:push      # Push Drizzle schema to database
 - `client/` - React frontend (Vite)
 - `server/` - Express backend
 - `shared/` - Shared types and schema (Drizzle + Zod)
+- `client/src/assets/silhouettes/` - SVG silhouettes for blob morphing
 
 ### Key Path Aliases
 - `@/` → `client/src/`
@@ -42,26 +42,53 @@ npm run db:push      # Push Drizzle schema to database
 - Express with TypeScript
 - In-memory storage (MemStorage class in `server/storage.ts`)
 - Drizzle ORM configured for PostgreSQL (schema in `shared/schema.ts`)
-- Session support via express-session
 
-### Server Architecture
-The Express server (`server/index.ts`) serves both the API and client:
-- Development: Vite middleware handles client with HMR
-- Production: Static files served from `dist/public`
-- API routes prefixed with `/api` (registered in `server/routes.ts`)
+## The Morphing Blob (Key Feature)
 
-### Build Process
-`script/build.ts` handles production builds:
-1. Vite builds client to `dist/public`
-2. esbuild bundles server to `dist/index.cjs` (CJS format)
-3. Some deps are bundled, others externalized for cold start optimization
+Located in `client/src/pages/home.tsx` as the `MorphingBlob` component.
+
+### How It Works
+1. **SimplexNoise** creates organic, continuous movement
+2. **SVG Path Parsing** extracts points from silhouette SVGs
+3. **Polar Coordinates** convert Cartesian points for radial manipulation
+4. **Gaussian Smoothing + Catmull-Rom Splines** for smooth shapes
+5. **Canvas/WebGL** renders multiple translucent layers
+
+### Current Silhouettes (3 energies)
+| Silhouette | File | Color Palette |
+|------------|------|---------------|
+| Man Portrait (side profile) | `man-sil.svg` | Electric Blue |
+| Front-Facing (direct) | `front-sil.svg` | Teal/Cyan |
+| Celebrate (hands up) | `celebrate-sil.svg` | Green/Gold |
+
+### Key Parameters
+- `maxMorph = 0.88` — How much blob becomes human (0 = blob, 1 = exact silhouette)
+- `colorTime = t * 0.022` — Color transition speed (~45 sec full cycle)
+- `TOTAL_CYCLE = 10` — Seconds per morph cycle
+
+### To Add a New Silhouette
+1. Add SVG to `client/src/assets/silhouettes/`
+2. Extract path data from SVG
+3. Add to `silhouettePaths` array in MorphingBlob
+4. Add corresponding color palette to `colorPalettes`
 
 ## Current State
 
-This is a single-page landing page with:
-- Hero section with parallax scroll effects
-- Custom cursor animation
-- Booking dialog with form (submits to Formspree)
-- Dark aesthetic with cream accent color
+**Landing page is complete and working locally.** Features:
+- Morphing blob with 3 silhouettes cycling with color transitions
+- Hero: "Story-driven design" + "Let's build your digital legacy"
+- Quote reveal on scroll: "We don't make websites. We create digital legacies."
+- Custom cursor with magnetic buttons
+- Contact form (Formspree)
+- Dark aesthetic with cream accents
 
-The backend storage interface exists but isn't actively used - the contact form POSTs directly to Formspree.
+## Next Steps
+- [ ] Git commit and push
+- [ ] Deploy to Vercel
+
+## Style Notes
+
+- **Aesthetic:** Premium, artistic, NOT template-y
+- **Colors:** Dark background, electric blue/teal/green accents, cream text
+- **Typography:** Large, sculptural, theatrical reveals
+- **Feel:** The page should make designers want to screenshot it
