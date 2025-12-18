@@ -183,7 +183,7 @@ export default function Home() {
             className="mt-12 md:mt-20 flex flex-col md:flex-row gap-8 md:items-end border-t border-white/10 pt-8"
           >
             <p className="max-w-md text-lg md:text-xl text-zinc-400 font-light leading-relaxed">
-              Stop explaining your value. <span className="text-white font-normal">Start showing it.</span> We craft the kind of undeniable digital presence that makes your expertise impossible to ignore—and your competition irrelevant.
+              Stop explaining your value. <span className="text-white font-normal">Start showing it.</span> We craft the kind of undeniable digital presence that makes your expertise impossible to ignore.
             </p>
             
             <div className="flex gap-4">
