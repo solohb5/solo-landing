@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -8,7 +8,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { ArrowUpRight } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(2, "Required"),
@@ -16,11 +15,13 @@ const formSchema = z.object({
   details: z.string().min(10, "Tell us more"),
 });
 
-// Cursor glow that follows mouse
-function CursorGlow() {
+/* ============================================
+   CURSOR SPOTLIGHT
+   ============================================ */
+function CursorSpotlight() {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  const springConfig = { damping: 25, stiffness: 200 };
+  const springConfig = { damping: 30, stiffness: 200 };
   const xSpring = useSpring(x, springConfig);
   const ySpring = useSpring(y, springConfig);
 
@@ -35,18 +36,28 @@ function CursorGlow() {
 
   return (
     <motion.div
-      className="cursor-glow hidden md:block"
+      className="cursor-spotlight hidden lg:block"
       style={{ left: xSpring, top: ySpring }}
     />
   );
 }
 
-// Magnetic element
-function Magnetic({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
+/* ============================================
+   MAGNETIC BUTTON
+   ============================================ */
+function MagneticButton({ 
+  children, 
+  className = "",
+  onClick 
+}: { 
+  children: React.ReactNode; 
+  className?: string;
+  onClick?: () => void;
+}) {
+  const ref = useRef<HTMLButtonElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  const springConfig = { damping: 20, stiffness: 300 };
+  const springConfig = { damping: 15, stiffness: 200 };
   const xSpring = useSpring(x, springConfig);
   const ySpring = useSpring(y, springConfig);
 
@@ -55,36 +66,91 @@ function Magnetic({ children, className = "" }: { children: React.ReactNode; cla
     const rect = ref.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
-    x.set((e.clientX - centerX) * 0.2);
-    y.set((e.clientY - centerY) * 0.2);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
+    x.set((e.clientX - centerX) * 0.3);
+    y.set((e.clientY - centerY) * 0.3);
   };
 
   return (
-    <motion.div
+    <motion.button
       ref={ref}
       style={{ x: xSpring, y: ySpring }}
       onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      onMouseLeave={() => { x.set(0); y.set(0); }}
+      onClick={onClick}
       className={className}
     >
+      {children}
+    </motion.button>
+  );
+}
+
+/* ============================================
+   REVEAL TEXT - The Signature Animation
+   ============================================ */
+function RevealText({ 
+  children, 
+  delay = 0,
+  className = ""
+}: { 
+  children: React.ReactNode; 
+  delay?: number;
+  className?: string;
+}) {
+  return (
+    <div className="overflow-hidden">
+      <motion.div
+        initial={{ y: "100%" }}
+        animate={{ y: 0 }}
+        transition={{ 
+          duration: 1.2, 
+          delay,
+          ease: [0.77, 0, 0.175, 1] 
+        }}
+        className={className}
+      >
+        {children}
+      </motion.div>
+    </div>
+  );
+}
+
+/* ============================================
+   PARALLAX LAYER
+   ============================================ */
+function ParallaxLayer({ 
+  children, 
+  speed = 0.5,
+  className = ""
+}: { 
+  children: React.ReactNode; 
+  speed?: number;
+  className?: string;
+}) {
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 1000], [0, -200 * speed]);
+
+  return (
+    <motion.div style={{ y }} className={className}>
       {children}
     </motion.div>
   );
 }
 
+/* ============================================
+   MAIN COMPONENT
+   ============================================ */
 export default function Home() {
   const [open, setOpen] = useState(false);
-  const [showContent, setShowContent] = useState(false);
-  const [hoveredWord, setHoveredWord] = useState<number | null>(null);
+  const [loaded, setLoaded] = useState(false);
   const { toast } = useToast();
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll();
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+  const heroScale = useTransform(scrollYProgress, [0, 0.15], [1, 0.95]);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowContent(true), 600);
+    const timer = setTimeout(() => setLoaded(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
@@ -95,59 +161,56 @@ export default function Home() {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
-    toast({ title: "Message sent", description: "We'll be in touch within 24 hours." });
+    toast({ title: "Request received", description: "We'll be in touch within 24 hours." });
     setOpen(false);
     form.reset();
   }
 
-  const words = ["Design", "that", "demands", "attention."];
-
   return (
-    <div className="bg-black text-white min-h-screen relative overflow-hidden">
-      {/* Intro Curtain */}
-      <div className="intro-curtain fixed inset-0 bg-black z-[100]" />
-      
+    <div ref={containerRef} className="bg-black text-white min-h-screen relative">
       {/* Grain Overlay */}
       <div className="grain" />
       
-      {/* Cursor Glow */}
-      <CursorGlow />
+      {/* Cursor Spotlight */}
+      <CursorSpotlight />
+      
+      {/* Curtain Reveal */}
+      <div className="curtain fixed inset-0 bg-black z-[100]" />
 
-      {/* Navigation */}
-      <motion.header 
+      {/* ============================================
+          NAVIGATION
+          ============================================ */}
+      <motion.nav
         initial={{ opacity: 0 }}
-        animate={{ opacity: showContent ? 1 : 0 }}
-        transition={{ duration: 1, delay: 0.3 }}
-        className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 md:px-12 py-8"
+        animate={{ opacity: loaded ? 1 : 0 }}
+        transition={{ duration: 0.8, delay: 2 }}
+        className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 md:px-10 lg:px-16 py-6 md:py-8 blend-difference"
       >
-        <div className="font-sans text-sm tracking-[0.2em] uppercase font-medium">
+        <span className="font-sans text-xs md:text-sm tracking-[0.25em] uppercase font-medium">
           Solo
-        </div>
+        </span>
         
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <button className="group flex items-center gap-3 font-sans text-sm tracking-[0.1em] uppercase magnetic">
-              <span className="link-underline">Start a project</span>
-              <span className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all duration-300">
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </span>
+            <button className="font-sans text-xs md:text-sm tracking-[0.15em] uppercase link-slide pb-1">
+              Work with us
             </button>
           </DialogTrigger>
           
-          <DialogContent className="max-w-[480px] bg-black border border-white/10 p-0 rounded-none" aria-describedby="dialog-description">
-            <div className="p-10 md:p-12">
+          <DialogContent className="max-w-md bg-[#0a0a0a] border border-white/10 p-0 rounded-none" aria-describedby="dialog-desc">
+            <div className="p-8 md:p-10">
               <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: 40 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="h-px bg-[hsl(35,100%,55%)] mb-10"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.8, delay: 0.1 }}
+                className="h-px w-12 bg-[var(--cream)] origin-left mb-8"
               />
               
-              <DialogTitle className="font-serif text-4xl md:text-5xl font-light mb-3">
-                Let's talk.
+              <DialogTitle className="font-serif text-3xl md:text-4xl font-normal mb-2">
+                Let's create.
               </DialogTitle>
-              <DialogDescription id="dialog-description" className="text-white/40 text-sm mb-10">
-                Tell us about your vision.
+              <DialogDescription id="dialog-desc" className="text-white/40 text-sm mb-8">
+                Share your vision with us.
               </DialogDescription>
               
               <Form {...form}>
@@ -159,9 +222,9 @@ export default function Home() {
                       <FormItem>
                         <FormControl>
                           <Input 
-                            placeholder="Name" 
+                            placeholder="Your name" 
                             {...field} 
-                            className="bg-transparent border-0 border-b border-white/10 rounded-none px-0 py-4 text-lg placeholder:text-white/25 focus-visible:ring-0 focus-visible:border-white/40 transition-colors"
+                            className="bg-transparent border-0 border-b border-white/10 rounded-none px-0 py-4 focus-visible:ring-0 focus-visible:border-white/30 placeholder:text-white/20"
                           />
                         </FormControl>
                         <FormMessage />
@@ -177,7 +240,7 @@ export default function Home() {
                           <Input 
                             placeholder="Email" 
                             {...field} 
-                            className="bg-transparent border-0 border-b border-white/10 rounded-none px-0 py-4 text-lg placeholder:text-white/25 focus-visible:ring-0 focus-visible:border-white/40 transition-colors"
+                            className="bg-transparent border-0 border-b border-white/10 rounded-none px-0 py-4 focus-visible:ring-0 focus-visible:border-white/30 placeholder:text-white/20"
                           />
                         </FormControl>
                         <FormMessage />
@@ -193,7 +256,7 @@ export default function Home() {
                           <Textarea 
                             placeholder="Tell us about your project" 
                             {...field} 
-                            className="bg-transparent border-0 border-b border-white/10 rounded-none px-0 py-4 text-lg placeholder:text-white/25 focus-visible:ring-0 focus-visible:border-white/40 transition-colors min-h-[120px] resize-none"
+                            className="bg-transparent border-0 border-b border-white/10 rounded-none px-0 py-4 focus-visible:ring-0 focus-visible:border-white/30 placeholder:text-white/20 min-h-[100px] resize-none"
                           />
                         </FormControl>
                         <FormMessage />
@@ -201,128 +264,259 @@ export default function Home() {
                     )}
                   />
                   
-                  <Magnetic className="pt-4">
-                    <button 
-                      type="submit"
-                      className="w-full bg-[hsl(35,100%,55%)] text-black py-5 font-sans text-sm tracking-[0.15em] uppercase font-semibold hover:bg-[hsl(35,100%,60%)] transition-colors"
-                    >
-                      Send Message
-                    </button>
-                  </Magnetic>
+                  <MagneticButton
+                    className="w-full bg-[var(--cream)] text-black py-4 font-sans text-sm tracking-[0.15em] uppercase font-medium hover:bg-white transition-colors mt-4"
+                  >
+                    Send
+                  </MagneticButton>
                 </form>
               </Form>
             </div>
           </DialogContent>
         </Dialog>
-      </motion.header>
+      </motion.nav>
 
-      {/* Hero */}
-      <main className="min-h-screen flex flex-col justify-center px-6 md:px-12 relative z-10">
-        <div className="max-w-[1600px] mx-auto w-full">
+      {/* ============================================
+          HERO SECTION
+          ============================================ */}
+      <motion.section 
+        style={{ opacity: heroOpacity, scale: heroScale }}
+        className="min-h-screen flex flex-col justify-center relative px-6 md:px-10 lg:px-16"
+      >
+        {/* Floating Elements - Depth */}
+        <ParallaxLayer speed={0.3} className="absolute top-[15%] right-[8%] pointer-events-none">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: loaded ? 0.15 : 0, scale: 1 }}
+            transition={{ duration: 1.5, delay: 2.5 }}
+            className="w-32 h-32 md:w-48 md:h-48 rounded-full border border-white/20 float-slow"
+          />
+        </ParallaxLayer>
+        
+        <ParallaxLayer speed={0.5} className="absolute bottom-[20%] left-[5%] pointer-events-none">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: loaded ? 0.08 : 0 }}
+            transition={{ duration: 1.5, delay: 2.8 }}
+            className="w-64 h-64 md:w-96 md:h-96 rounded-full bg-[var(--cream)] blur-[100px] float-medium"
+          />
+        </ParallaxLayer>
+
+        {/* Main Content */}
+        <div className="max-w-[1400px] mx-auto w-full relative z-10">
+          {/* Eyebrow */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 20 }}
+            transition={{ duration: 0.8, delay: 2.2 }}
+            className="mb-8 md:mb-12"
+          >
+            <span className="font-sans text-[10px] md:text-xs uppercase tracking-[0.4em] text-white/40">
+              Design Studio — Est. 2025
+            </span>
+          </motion.div>
+
           {/* Main Headline */}
-          <h1 className="mb-16 md:mb-24">
-            {words.map((word, i) => (
-              <motion.span
-                key={i}
-                initial={{ opacity: 0, y: 100 }}
-                animate={{ 
-                  opacity: showContent ? 1 : 0, 
-                  y: showContent ? 0 : 100 
-                }}
-                transition={{ 
-                  duration: 1.2, 
-                  delay: 0.8 + i * 0.12,
-                  ease: [0.22, 1, 0.36, 1]
-                }}
-                onMouseEnter={() => setHoveredWord(i)}
-                onMouseLeave={() => setHoveredWord(null)}
-                className={`
-                  inline-block mr-[0.15em] font-serif font-light
-                  text-[15vw] md:text-[12vw] lg:text-[10vw] leading-[0.9] tracking-[-0.03em]
-                  transition-all duration-500 cursor-default
-                  ${i === 2 ? 'italic text-[hsl(35,100%,55%)]' : ''}
-                  ${hoveredWord !== null && hoveredWord !== i ? 'opacity-20' : 'opacity-100'}
-                `}
-              >
-                {word}
-              </motion.span>
-            ))}
+          <h1 className="font-serif font-normal text-[11vw] md:text-[9vw] lg:text-[7.5vw] leading-[0.95] tracking-[-0.02em] mb-12 md:mb-16">
+            <RevealText delay={2.4}>
+              <span className="block">Your expertise</span>
+            </RevealText>
+            <RevealText delay={2.55}>
+              <span className="block">deserves to be</span>
+            </RevealText>
+            <RevealText delay={2.7}>
+              <span className="block text-[var(--cream)]">seen.</span>
+            </RevealText>
           </h1>
 
-          {/* Subline */}
-          <motion.div 
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 40 }}
-            transition={{ duration: 1, delay: 1.6, ease: [0.22, 1, 0.36, 1] }}
-            className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-4"
-          >
-            <div className="md:col-span-5 lg:col-span-4">
-              <p className="text-white/50 text-lg md:text-xl font-light leading-relaxed">
-                We create digital experiences for those who refuse to blend in.
-                <span className="text-white"> One client at a time.</span>
+          {/* Subline & CTA */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-end">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 30 }}
+              transition={{ duration: 1, delay: 3 }}
+              className="lg:col-span-5"
+            >
+              <p className="font-sans text-base md:text-lg lg:text-xl text-white/50 font-light leading-relaxed">
+                We craft digital experiences for those who refuse to blend in. 
+                <span className="text-white"> Premium design. Limited availability.</span>
               </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 30 }}
+              transition={{ duration: 1, delay: 3.2 }}
+              className="lg:col-start-10 lg:col-span-3"
+            >
+              <Dialog open={open} onOpenChange={setOpen}>
+                <DialogTrigger asChild>
+                  <button className="group flex items-center gap-4 font-sans text-sm tracking-[0.1em] uppercase">
+                    <span className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-white/30 flex items-center justify-center group-hover:bg-[var(--cream)] group-hover:border-[var(--cream)] transition-all duration-500">
+                      <svg 
+                        className="w-4 h-4 group-hover:text-black transition-colors duration-500" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7V17" />
+                      </svg>
+                    </span>
+                    <span className="link-slide pb-1">Book a call</span>
+                  </button>
+                </DialogTrigger>
+              </Dialog>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: loaded ? 1 : 0 }}
+          transition={{ duration: 1, delay: 3.5 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+        >
+          <span className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/30">Scroll</span>
+          <div className="w-px h-12 bg-gradient-to-b from-white/30 to-transparent scroll-indicator" />
+        </motion.div>
+      </motion.section>
+
+      {/* ============================================
+          PHILOSOPHY SECTION
+          ============================================ */}
+      <section className="min-h-screen flex items-center relative px-6 md:px-10 lg:px-16 py-32">
+        <div className="max-w-[1400px] mx-auto w-full">
+          <motion.div
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: [0.77, 0, 0.175, 1] }}
+            viewport={{ once: true, margin: "-20%" }}
+            className="grid grid-cols-1 lg:grid-cols-12 gap-16"
+          >
+            <div className="lg:col-span-2">
+              <span className="font-sans text-[10px] uppercase tracking-[0.4em] text-white/30">01 — Philosophy</span>
             </div>
             
-            <div className="md:col-start-9 md:col-span-4 lg:col-start-10 lg:col-span-3 flex flex-col gap-6">
-              <div className="flex items-baseline gap-4">
-                <span className="text-5xl md:text-6xl font-serif">12</span>
-                <span className="text-white/40 text-sm uppercase tracking-wider">Years</span>
-              </div>
-              <div className="flex items-baseline gap-4">
-                <span className="text-5xl md:text-6xl font-serif">∞</span>
-                <span className="text-white/40 text-sm uppercase tracking-wider">Possibilities</span>
-              </div>
+            <div className="lg:col-span-8">
+              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-normal leading-[1.3] mb-12">
+                Stop explaining your value.
+                <br />
+                <span className="text-[var(--cream)] italic">Start showing it.</span>
+              </h2>
+              
+              <p className="font-sans text-white/40 text-base md:text-lg leading-relaxed max-w-2xl">
+                The best founders, leaders, and experts don't have a visibility problem—they have a 
+                translation problem. We bridge the gap between what you do and how the world perceives it.
+              </p>
             </div>
           </motion.div>
         </div>
-      </main>
+      </section>
 
-      {/* Marquee Footer */}
-      <motion.footer 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: showContent ? 1 : 0 }}
-        transition={{ duration: 1, delay: 2 }}
-        className="fixed bottom-0 left-0 right-0 border-t border-white/5 py-5 overflow-hidden z-40"
-      >
-        <div className="marquee whitespace-nowrap">
-          {[...Array(2)].map((_, i) => (
-            <span key={i} className="inline-block">
-              {["Brand Identity", "Web Design", "Digital Strategy", "Creative Direction", "Visual Systems", "Art Direction"].map((item, j) => (
-                <span key={j} className="inline-flex items-center mx-8">
-                  <span className="text-white/30 text-sm uppercase tracking-[0.2em] font-sans">{item}</span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-[hsl(35,100%,55%)] ml-8" />
-                </span>
-              ))}
-            </span>
-          ))}
+      {/* ============================================
+          SERVICES SECTION
+          ============================================ */}
+      <section className="py-32 relative px-6 md:px-10 lg:px-16 border-t border-white/5">
+        <div className="max-w-[1400px] mx-auto w-full">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: [0.77, 0, 0.175, 1] }}
+            viewport={{ once: true, margin: "-10%" }}
+            className="mb-20"
+          >
+            <span className="font-sans text-[10px] uppercase tracking-[0.4em] text-white/30">02 — Services</span>
+          </motion.div>
+
+          <div className="space-y-0">
+            {[
+              { num: "01", title: "Brand Strategy", desc: "Positioning that resonates" },
+              { num: "02", title: "Web Design", desc: "Experiences that convert" },
+              { num: "03", title: "Visual Identity", desc: "Systems that scale" },
+            ].map((service, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: i * 0.1, ease: [0.77, 0, 0.175, 1] }}
+                viewport={{ once: true, margin: "-10%" }}
+                className="group grid grid-cols-12 gap-4 py-8 md:py-12 border-b border-white/5 hover:border-white/20 transition-colors cursor-default"
+              >
+                <span className="col-span-2 md:col-span-1 font-serif text-white/20 text-sm">{service.num}</span>
+                <h3 className="col-span-10 md:col-span-5 font-serif text-2xl md:text-3xl lg:text-4xl group-hover:text-[var(--cream)] transition-colors duration-500">
+                  {service.title}
+                </h3>
+                <p className="col-span-12 md:col-span-4 md:col-start-9 font-sans text-white/40 text-sm md:text-base self-center">
+                  {service.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </motion.footer>
+      </section>
 
-      {/* Corner Accents */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: showContent ? 1 : 0 }}
-        transition={{ duration: 1, delay: 1.8 }}
-        className="fixed bottom-20 left-6 md:left-12 z-30"
-      >
-        <a 
-          href="mailto:hello@solo.design" 
-          className="text-white/30 text-sm font-sans hover:text-white transition-colors link-underline"
-        >
-          hello@solo.design
-        </a>
-      </motion.div>
+      {/* ============================================
+          CTA SECTION
+          ============================================ */}
+      <section className="py-32 md:py-48 relative px-6 md:px-10 lg:px-16">
+        <ParallaxLayer speed={0.2} className="absolute top-[20%] right-[15%] pointer-events-none">
+          <div className="w-24 h-24 md:w-32 md:h-32 rounded-full border border-[var(--cream)]/20 float-medium" />
+        </ParallaxLayer>
 
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: showContent ? 1 : 0 }}
-        transition={{ duration: 1, delay: 1.8 }}
-        className="fixed bottom-20 right-6 md:right-12 z-30"
-      >
-        <span className="text-white/30 text-sm font-sans">
-          NYC / LA / REMOTE
-        </span>
-      </motion.div>
+        <div className="max-w-[1400px] mx-auto w-full text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: [0.77, 0, 0.175, 1] }}
+            viewport={{ once: true, margin: "-20%" }}
+          >
+            <span className="font-sans text-[10px] uppercase tracking-[0.4em] text-white/30 mb-8 block">
+              Ready?
+            </span>
+            
+            <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl font-normal leading-[1.1] mb-12">
+              Let's build something
+              <br />
+              <span className="italic text-[var(--cream)]">unforgettable.</span>
+            </h2>
+            
+            <Dialog open={open} onOpenChange={setOpen}>
+              <DialogTrigger asChild>
+                <button className="inline-flex items-center gap-3 border border-white/20 hover:border-[var(--cream)] hover:text-[var(--cream)] px-8 md:px-12 py-4 md:py-5 font-sans text-sm tracking-[0.15em] uppercase transition-all duration-500">
+                  <span>Start a project</span>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7V17" />
+                  </svg>
+                </button>
+              </DialogTrigger>
+            </Dialog>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ============================================
+          FOOTER
+          ============================================ */}
+      <footer className="py-8 px-6 md:px-10 lg:px-16 border-t border-white/5">
+        <div className="max-w-[1400px] mx-auto w-full flex flex-col md:flex-row justify-between items-center gap-4">
+          <span className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/20">
+            © 2025 Solo Design Studio
+          </span>
+          
+          <div className="flex gap-8">
+            {["Twitter", "LinkedIn", "Dribbble"].map((link) => (
+              <a 
+                key={link} 
+                href="#" 
+                className="font-sans text-[10px] uppercase tracking-[0.2em] text-white/20 hover:text-[var(--cream)] transition-colors link-slide pb-1"
+              >
+                {link}
+              </a>
+            ))}
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
