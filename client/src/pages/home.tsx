@@ -172,10 +172,10 @@ export default function Home() {
         >
           <motion.h1 
             variants={fadeInUp}
-            className="text-[12vw] leading-[0.85] font-serif font-light tracking-tight text-balance mix-blend-difference text-white"
+            className="text-[10vw] leading-[0.9] font-serif font-light tracking-tight text-balance mix-blend-difference text-white"
           >
-            Digital <br />
-            <span className="italic font-normal pl-[2vw]">Legacies.</span>
+            Build your <br />
+            <span className="italic font-normal pl-[2vw]">Digital Legacy.</span>
           </motion.h1>
 
           <motion.div 
@@ -183,15 +183,14 @@ export default function Home() {
             className="mt-12 md:mt-20 flex flex-col md:flex-row gap-8 md:items-end border-t border-white/10 pt-8"
           >
             <p className="max-w-md text-lg md:text-xl text-zinc-400 font-light leading-relaxed">
-              We craft bespoke digital experiences for brands that refuse to compromise. 
-              Precision, elegance, and purpose in every pixel.
+              World-class web design at Coach Class prices. We craft bespoke digital experiences for brands that refuse to compromise.
             </p>
             
             <div className="flex gap-4">
               <Dialog open={open} onOpenChange={setOpen}>
                   <DialogTrigger asChild>
                     <Button className="rounded-none bg-white text-black hover:bg-zinc-200 h-14 px-8 text-sm uppercase tracking-widest transition-transform hover:-translate-y-1 duration-300">
-                      Start Project
+                      Book Consultation
                     </Button>
                   </DialogTrigger>
               </Dialog>
