@@ -183,20 +183,17 @@ export default function Home() {
             className="mt-12 md:mt-20 flex flex-col md:flex-row gap-8 md:items-end border-t border-white/10 pt-8"
           >
             <p className="max-w-md text-lg md:text-xl text-zinc-400 font-light leading-relaxed">
-              World-class web design at Coach Class prices. We craft bespoke digital experiences for brands that refuse to compromise.
+              The internet is noisy. <span className="text-white font-normal">Be the signal.</span> We bring elite, world-class design to those bold enough to claim it—without the agency price tag.
             </p>
             
             <div className="flex gap-4">
               <Dialog open={open} onOpenChange={setOpen}>
                   <DialogTrigger asChild>
-                    <Button className="rounded-none bg-white text-black hover:bg-zinc-200 h-14 px-8 text-sm uppercase tracking-widest transition-transform hover:-translate-y-1 duration-300">
+                    <Button className="rounded-none bg-white text-black hover:bg-zinc-200 h-14 px-10 text-sm uppercase tracking-widest transition-transform hover:-translate-y-1 duration-300">
                       Book Consultation
                     </Button>
                   </DialogTrigger>
               </Dialog>
-              <Button variant="outline" className="rounded-none border-white/20 text-white hover:bg-white hover:text-black h-14 px-8 text-sm uppercase tracking-widest transition-colors duration-300">
-                View Works
-              </Button>
             </div>
           </motion.div>
         </motion.div>
