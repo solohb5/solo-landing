@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { ArrowRight, Menu, X } from "lucide-react";
-import heroImg from "@assets/generated_images/abstract_architectural_glass_and_light.png";
+import heroImg from "@assets/generated_images/dark_liquid_chrome_abstract_wave.png";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name is required"),
