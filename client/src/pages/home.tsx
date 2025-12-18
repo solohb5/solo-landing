@@ -454,7 +454,7 @@ function MorphingBlob({ mouseX, mouseY, scrollProgress, isCtaHover }: { mouseX: 
           centerX, centerY, 0,
           centerX, centerY, baseRadius * 0.38
         );
-        coreGlow.addColorStop(0, `rgba(255, 255, 255, 0.5)`);
+        coreGlow.addColorStop(0, `rgba(245, 230, 200, 0.6)`);
         coreGlow.addColorStop(0.3, `rgba(${coreColor.r}, ${coreColor.g}, ${coreColor.b}, 0.28)`);
         coreGlow.addColorStop(0.6, `rgba(${coreColor.r}, ${coreColor.g}, ${coreColor.b}, 0.12)`);
         coreGlow.addColorStop(1, `rgba(${coreColor.r}, ${coreColor.g}, ${coreColor.b}, 0)`);
@@ -837,23 +837,23 @@ export default function Home() {
               </motion.div>
 
               {/* Main headline - MASSIVE */}
-              <div className="space-y-1 md:space-y-2">
-                <div className="overflow-hidden pb-[0.15em]">
+              <div className="-space-y-2 md:-space-y-4">
+                <div className="overflow-hidden">
                   <motion.h1
-                    initial={{ y: "110%" }}
-                    animate={{ y: loaded ? 0 : "110%" }}
+                    initial={{ y: "100%" }}
+                    animate={{ y: loaded ? 0 : "100%" }}
                     transition={{ duration: 1.4, delay: 2.1, ease: [0.16, 1, 0.3, 1] }}
-                    className="font-serif text-[10vw] md:text-[7vw] lg:text-[6vw] xl:text-[5vw] font-light leading-[1.15] tracking-[-0.02em] text-white/90"
+                    className="font-serif text-[14vw] md:text-[11vw] lg:text-[9vw] font-light leading-[1.1] tracking-[-0.03em] text-white/90 pb-[0.2em]"
                   >
                     Your legacy.
                   </motion.h1>
                 </div>
-                <div className="overflow-hidden pb-[0.15em]">
+                <div className="overflow-hidden">
                   <motion.h1
-                    initial={{ y: "110%" }}
-                    animate={{ y: loaded ? 0 : "110%" }}
+                    initial={{ y: "100%" }}
+                    animate={{ y: loaded ? 0 : "100%" }}
                     transition={{ duration: 1.4, delay: 2.25, ease: [0.16, 1, 0.3, 1] }}
-                    className="font-serif text-[10vw] md:text-[7vw] lg:text-[6vw] xl:text-[5vw] font-light leading-[1.15] tracking-[-0.02em] italic text-[var(--cream)]"
+                    className="font-serif text-[14vw] md:text-[11vw] lg:text-[9vw] font-light leading-[1.1] tracking-[-0.03em] italic text-[var(--cream)] pb-[0.2em]"
                   >
                     In pixels.
                   </motion.h1>
@@ -890,21 +890,6 @@ export default function Home() {
                 </MagneticButton>
               </div>
 
-              {/* Price - whispered */}
-              <motion.div 
-                className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: loaded ? 1 : 0 }}
-                transition={{ duration: 1, delay: 3.2 }}
-              >
-                <span className="text-[12px] text-white/25 font-light tracking-wide">
-                  $5,000 · 2 weeks
-                </span>
-                <span className="hidden sm:block w-16 h-[1px] bg-white/10" />
-                <span className="text-[10px] tracking-[0.2em] uppercase text-white/20 font-light">
-                  limited availability
-                </span>
-              </motion.div>
             </motion.div>
           </div>
         </div>
@@ -914,11 +899,8 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: loaded ? 1 : 0 }}
           transition={{ duration: 1, delay: 3.5 }}
-          className="hidden sm:flex absolute bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-4"
+          className="hidden sm:flex absolute bottom-10 left-1/2 -translate-x-1/2 flex-col items-center"
         >
-          <span className="text-[9px] tracking-[0.4em] uppercase text-white/20 font-light">
-            Scroll
-          </span>
           <div className="scroll-indicator w-[1px] h-16 bg-gradient-to-b from-white/30 to-transparent" />
         </motion.div>
       </motion.section>
@@ -1071,7 +1053,7 @@ export default function Home() {
                     whileInView={{ y: 0 }}
                     transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                     viewport={{ once: true }}
-                    className="font-serif text-[18vw] md:text-[14vw] lg:text-[12vw] font-light leading-[0.85] tracking-[-0.04em] text-white/90"
+                    className="font-serif text-[18vw] md:text-[14vw] lg:text-[12vw] font-light leading-[1.05] tracking-[-0.04em] text-white/90 pb-[0.15em]"
                   >
                     Ready?
                   </motion.h2>
@@ -1109,18 +1091,18 @@ export default function Home() {
                 </motion.div>
 
                 <motion.div
-                  className="col-span-12 md:col-span-4 md:col-start-9 text-left md:text-right mt-8 md:mt-0"
+                  className="col-span-12 md:col-span-5 md:col-start-8 text-left md:text-right mt-10 md:mt-0"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 0.8, delay: 0.5 }}
                   viewport={{ once: true }}
                 >
                   <div className="inline-block">
-                    <span className="text-[13px] text-white/25 font-light block mb-2">
-                      $5,000 · 2 weeks
+                    <span className="text-[14px] md:text-[16px] text-white/50 font-light block leading-relaxed">
+                      Brand. Copy. Website.
                     </span>
-                    <span className="text-[10px] tracking-[0.2em] uppercase text-white/15 font-light">
-                      limited availability
+                    <span className="text-[14px] md:text-[16px] text-[var(--cream)] font-light">
+                      $5,000. Two weeks.
                     </span>
                   </div>
                 </motion.div>
