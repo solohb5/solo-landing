@@ -201,28 +201,28 @@ function MorphingBlob({ mouseX, mouseY, scrollProgress, isCtaHover }: { mouseX: 
   const timeRef = useRef(0);
   const [silhouettes, setSilhouettes] = useState<number[][]>([]);
   
-  // Color palettes - smooth continuous transition between these
+  // Color palettes - smoke tones that blend into the void
   const colorPalettes = useMemo(() => [
-    // Deep Sapphire - authority, trust, depth
+    // Cool smoke - slightly blue undertone
     [
-      { r: 30, g: 60, b: 120 },
-      { r: 50, g: 90, b: 160 },
-      { r: 80, g: 130, b: 200 },
-      { r: 140, g: 180, b: 230 },
+      { r: 25, g: 28, b: 32 },
+      { r: 45, g: 50, b: 58 },
+      { r: 75, g: 82, b: 95 },
+      { r: 120, g: 130, b: 145 },
     ],
-    // Warm Bronze/Amber - luxury, warmth, premium
+    // Neutral smoke - pure grayscale
     [
-      { r: 180, g: 130, b: 70 },
-      { r: 210, g: 160, b: 90 },
-      { r: 230, g: 190, b: 120 },
-      { r: 245, g: 220, b: 180 },
+      { r: 30, g: 30, b: 30 },
+      { r: 55, g: 55, b: 55 },
+      { r: 90, g: 90, b: 90 },
+      { r: 140, g: 140, b: 140 },
     ],
-    // Deep Emerald - sophistication, growth, legacy
+    // Warm smoke - subtle warmth
     [
-      { r: 30, g: 100, b: 80 },
-      { r: 50, g: 140, b: 110 },
-      { r: 80, g: 180, b: 140 },
-      { r: 150, g: 220, b: 190 },
+      { r: 32, g: 28, b: 25 },
+      { r: 58, g: 52, b: 48 },
+      { r: 95, g: 85, b: 78 },
+      { r: 145, g: 135, b: 125 },
     ],
   ], []);
   
@@ -454,7 +454,7 @@ function MorphingBlob({ mouseX, mouseY, scrollProgress, isCtaHover }: { mouseX: 
           centerX, centerY, 0,
           centerX, centerY, baseRadius * 0.38
         );
-        coreGlow.addColorStop(0, `rgba(255, 255, 255, 0.4)`);
+        coreGlow.addColorStop(0, `rgba(255, 255, 255, 0.5)`);
         coreGlow.addColorStop(0.3, `rgba(${coreColor.r}, ${coreColor.g}, ${coreColor.b}, 0.28)`);
         coreGlow.addColorStop(0.6, `rgba(${coreColor.r}, ${coreColor.g}, ${coreColor.b}, 0.12)`);
         coreGlow.addColorStop(1, `rgba(${coreColor.r}, ${coreColor.g}, ${coreColor.b}, 0)`);
@@ -800,7 +800,7 @@ export default function Home() {
         transition={{ duration: 0.8, delay: 1.8 }}
         className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 md:px-12 py-6 md:py-8 mix-blend-difference"
       >
-        <span className="text-[10px] tracking-[0.5em] uppercase text-[var(--cream)] font-medium">
+        <span className="text-[10px] tracking-[0.5em] uppercase text-[var(--cream)] font-medium" style={{ textShadow: '0 0 20px rgba(245, 230, 200, 0.6), 0 0 40px rgba(245, 230, 200, 0.4)' }}>
           Solo
         </span>
         <MagneticButton
@@ -876,12 +876,12 @@ export default function Home() {
               <div className="flex flex-wrap items-center gap-6">
                 <MagneticButton
                   onClick={() => setDialogOpen(true)}
-                  className="group relative overflow-hidden bg-[var(--cream)] hover:bg-white px-10 py-5 transition-all duration-700"
+                  className="group relative overflow-hidden bg-[var(--cream)] hover:bg-white w-full sm:w-auto px-10 py-5 transition-all duration-700 shadow-[0_0_30px_rgba(245,230,200,0.5),0_0_60px_rgba(245,230,200,0.25)] hover:shadow-[0_0_40px_rgba(245,230,200,0.7),0_0_80px_rgba(245,230,200,0.4)]"
                   cursorText="Go"
                   onMouseEnter={() => setCtaHover(true)}
                   onMouseLeave={() => setCtaHover(false)}
                 >
-                  <span className="relative z-10 text-[10px] tracking-[0.3em] uppercase text-black font-medium flex items-center gap-3">
+                  <span className="relative z-10 text-[10px] tracking-[0.3em] uppercase text-black font-medium flex items-center justify-center gap-3">
                     Start a conversation
                     <svg className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -892,16 +892,16 @@ export default function Home() {
 
               {/* Price - whispered */}
               <motion.div 
-                className="mt-10 flex items-center gap-6"
+                className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: loaded ? 1 : 0 }}
                 transition={{ duration: 1, delay: 3.2 }}
               >
-                <span className="text-[12px] text-white/20 font-light tracking-wide">
+                <span className="text-[12px] text-white/25 font-light tracking-wide">
                   $5,000 · 2 weeks
                 </span>
-                <span className="w-16 h-[1px] bg-white/10" />
-                <span className="text-[10px] tracking-[0.2em] uppercase text-white/15 font-light">
+                <span className="hidden sm:block w-16 h-[1px] bg-white/10" />
+                <span className="text-[10px] tracking-[0.2em] uppercase text-white/20 font-light">
                   limited availability
                 </span>
               </motion.div>
@@ -909,12 +909,12 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Scroll indicator - absolute bottom */}
+        {/* Scroll indicator - absolute bottom, hidden on mobile */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: loaded ? 1 : 0 }}
           transition={{ duration: 1, delay: 3.5 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
+          className="hidden sm:flex absolute bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-4"
         >
           <span className="text-[9px] tracking-[0.4em] uppercase text-white/20 font-light">
             Scroll
@@ -1092,13 +1092,13 @@ export default function Home() {
                     even better for you. 15 minutes. No pitch. Just possibilities.
                   </p>
                   
-                  <div className="flex flex-wrap items-center gap-4">
+                  <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto">
                     <MagneticButton
                       onClick={() => setDialogOpen(true)}
-                      className="group relative border border-white/10 hover:border-[var(--cream)]/40 hover:bg-[var(--cream)]/[0.03] px-10 py-5 transition-all duration-700"
+                      className="group relative border border-white/10 hover:border-[var(--cream)]/40 hover:bg-[var(--cream)]/[0.03] w-full sm:w-auto px-10 py-5 transition-all duration-700"
                       cursorText="Let's go"
                     >
-                      <span className="text-[10px] tracking-[0.3em] uppercase text-white/60 group-hover:text-[var(--cream)] transition-colors duration-500 font-light flex items-center gap-3">
+                      <span className="text-[10px] tracking-[0.3em] uppercase text-white/60 group-hover:text-[var(--cream)] transition-colors duration-500 font-light flex items-center justify-center gap-3">
                         Book a call
                         <svg className="w-4 h-4 text-white/30 group-hover:text-[var(--cream)] group-hover:translate-x-1 transition-all duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -1109,17 +1109,17 @@ export default function Home() {
                 </motion.div>
 
                 <motion.div
-                  className="col-span-12 md:col-span-4 md:col-start-9 text-right"
+                  className="col-span-12 md:col-span-4 md:col-start-9 text-left md:text-right mt-8 md:mt-0"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 0.8, delay: 0.5 }}
                   viewport={{ once: true }}
                 >
                   <div className="inline-block">
-                    <span className="text-[13px] text-white/20 font-light block mb-2">
+                    <span className="text-[13px] text-white/25 font-light block mb-2">
                       $5,000 · 2 weeks
                     </span>
-                    <span className="text-[10px] tracking-[0.2em] uppercase text-white/10 font-light">
+                    <span className="text-[10px] tracking-[0.2em] uppercase text-white/15 font-light">
                       limited availability
                     </span>
                   </div>

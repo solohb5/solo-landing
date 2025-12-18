@@ -15,12 +15,12 @@
   --mist: #666666;
   --snow: #ffffff;
 
-  /* Accent - Warm Bone - Elegant & Commanding */
-  --cream: #F0E6D3;
-  --cream-light: #FAF6F0;
-  --cream-muted: #D9CBBA;
-  --cream-dark: #C4B49E;
-  --cream-glow: rgba(240, 230, 211, 0.15);
+  /* Accent - Warm Bone - Vibrant & Commanding */
+  --cream: #F5E6C8;
+  --cream-light: #FFF8EC;
+  --cream-muted: #E5D4B8;
+  --cream-dark: #D4C4A8;
+  --cream-glow: rgba(245, 230, 200, 0.2);
 
   /* Typography Scale */
   --text-xs: clamp(0.625rem, 0.6rem + 0.1vw, 0.6875rem);
