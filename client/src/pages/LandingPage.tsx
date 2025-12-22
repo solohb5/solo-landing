@@ -150,7 +150,7 @@ export default function LandingPage() {
       </section>
 
       {/* Section 03 - The Process */}
-      <section className="pt-20 md:pt-32 pb-8 md:pb-12 px-6 md:px-12 max-w-[1400px] mx-auto">
+      <section className="pt-20 md:pt-32 pb-12 md:pb-16 px-6 md:px-12 max-w-[1400px] mx-auto">
         <div className="flex flex-col gap-6 md:gap-10">
           {/* Number */}
           <motion.div 
@@ -208,7 +208,7 @@ export default function LandingPage() {
       </section>
 
       {/* The Big Reveal - Separate section for drama */}
-      <section className="pt-8 md:pt-12 pb-16 md:pb-24 px-6 md:px-12 max-w-[1400px] mx-auto">
+      <section className="pt-12 md:pt-16 pb-16 md:pb-24 px-6 md:px-12 max-w-[1400px] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 80 }}
           whileInView={{ opacity: 1, y: 0 }}
