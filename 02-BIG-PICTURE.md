@@ -1,162 +1,131 @@
 # 🗺️ BIG PICTURE — Solo Canvas
 
-**The vision. Simple and focused.**
+**Last Updated:** December 22, 2024
 
 ---
 
 ## What Is This?
 
-**One-liner:** A premium single-page landing site for Solo Designs — where stillness is the statement and the heartbeat is the soul.
+**Solo Designs** — A boutique web design studio building premium websites for personal brands.
 
-**The Philosophy:** Everything is still. One thing is alive. That's enough.
+**The Site:** A single-page landing experience that makes visitors feel the quality before reading a word.
 
-**The User:** High-performers who've seen "BY SOLO DESIGNS" on client sites. They already know the quality. This page confirms it and opens the door.
-
----
-
-## The Signature
-
-The gold square in "SOLO▪" pulses like a heartbeat — the ONLY animation on the entire site.
-
-This creates a sense that the brand is alive, breathing, waiting.
-
-**1.2 seconds per beat** (50 BPM — slower than resting heart rate, feels calm and confident)
+**The Audience:** Speakers, coaches, creators, podcasters, founders — people who ARE the brand. They arrive from "BY SOLO DESIGNS" links in client footers (e.g., theedgeofhonor.com).
 
 ---
 
-## Design System
+## The Philosophy
 
-### Colors
+> "Everything is still. One thing is alive. That's enough."
 
-| Role | Hex | Usage |
-|------|-----|-------|
-| Background | #1A1A1A | Charcoal (NOT pure black) |
-| Primary | #F5F2EB | Headlines, body (warm cream) |
-| Secondary | #8A8780 | Subtle text (warm stone) |
-| Accent | #C9A227 | The square, numbers, CTA hover (warm gold) |
-
-### Typography
-
-| Element | Font | Notes |
-|---------|------|-------|
-| Hero word | Cormorant Garamond 300 | 120px desktop, 64px mobile |
-| Section numbers | Inter 500 | Gold, uppercase |
-| Body headlines | Cormorant Garamond 400 | 36px desktop |
-| Body text | Inter 400 | 18px, 1.8 line-height |
-| CTA | Inter 500 | Uppercase, 0.1em tracking |
+The pulsing gold square is the heartbeat of the brand — the only persistent animation. Everything else is restraint, craft, and intentional stillness.
 
 ---
 
-## Page Structure
+## Current State: ✅ LAUNCH READY
 
-```
-┌─────────────────────────────────────┐
-│            HERO (100vh)             │
-│                                     │
-│           [SOLO▪ logo]              │
-│                                     │
-│             Finally.                │
-│    A website that feels like you.   │
-│                ↓                    │
-└─────────────────────────────────────┘
-
-┌─────────────────────────────────────┐
-│          SECTION 01: TRUTH          │
-│  01 ▪                               │
-│  You've built something real.       │
-│  Your website doesn't show it.      │
-└─────────────────────────────────────┘
-
-┌─────────────────────────────────────┐
-│          SECTION 02: WAY            │
-│  02 ▪                               │
-│  One conversation. Two weeks.       │
-│  Brand, copy, site — from truth.    │
-└─────────────────────────────────────┘
-
-┌─────────────────────────────────────┐
-│         SECTION 03: PROOF           │
-│  03 ▪                               │
-│  [Browser mockup — Jovanny]         │
-│  "I finally have a site..."         │
-└─────────────────────────────────────┘
-
-┌─────────────────────────────────────┐
-│          SECTION 04: DOOR           │
-│  Your legacy deserves more than     │
-│  a template.                        │
-│                                     │
-│          [ Begin → ]                │
-└─────────────────────────────────────┘
-
-┌─────────────────────────────────────┐
-│              FOOTER                 │
-│             SOLO▪                   │
-│        hello@solodesigns.co         │
-└─────────────────────────────────────┘
-```
+### What's Complete
+- [x] Hero with dramatic typography + hollow "STORY" effect
+- [x] Section flow with editorial numbering (01, 02, 03)
+- [x] Interactive effects (strikethrough reveals, spotlight text, hollow-to-fill)
+- [x] Color mode system (4 themes)
+- [x] Contact form connected to Formspree
+- [x] Case study gallery with Jovanny Jones
+- [x] Preloader sequence
+- [x] Custom cursor
+- [x] Mobile responsive
+- [x] Vercel deployment
+- [x] All copy finalized
 
 ---
 
-## Interactions
+## Recommended Next Steps
 
-| Element | Behavior |
-|---------|----------|
-| Gold squares | Pulse (heartbeat) at 1.2s |
-| CTA button | Gold fill on hover, text inverts |
-| Footer links | Square rotates 45° to diamond |
+### Priority 1: Launch Essentials
+| Task | Why | Effort |
+|------|-----|--------|
+| Add meta tags / Open Graph | Better social sharing, SEO | 30 min |
+| Add favicon | Professional polish | 10 min |
+| Test form on production | Verify Formspree works live | 5 min |
+| Mobile QA pass | Ensure perfect mobile experience | 1 hr |
+
+### Priority 2: Growth & Analytics
+| Task | Why | Effort |
+|------|-----|--------|
+| Add analytics (Plausible/GA) | Track visitors, conversions | 30 min |
+| Set up Formspree notifications | Get instant alerts on submissions | 10 min |
+| Create thank-you state for form | Better UX after submission | 30 min |
+
+### Priority 3: Content & Portfolio
+| Task | Why | Effort |
+|------|-----|--------|
+| Add more case studies | Social proof, portfolio depth | As available |
+| Testimonial collection | Build credibility | Ongoing |
+| Blog/insights section | SEO, thought leadership | Future phase |
+
+### Priority 4: Polish (Optional)
+| Task | Why | Effort |
+|------|-----|--------|
+| Performance audit | Faster load times | 1-2 hrs |
+| Accessibility audit | WCAG compliance | 1-2 hrs |
+| A/B test headlines | Optimize conversion | Ongoing |
 
 ---
 
-## What Does NOT Exist
+## What Does NOT Belong
 
+Keep the site minimal. Don't add:
 - Navigation menu / hamburger
-- Multiple pages
-- Contact form (just email link)
-- Social icons
-- Scroll animations
-- Parallax effects
-- Custom cursor
-- Loading screen
-- Carousels / sliders
+- Multiple pages (keep it single-page)
+- Social media icons
+- Trust badges / logos
+- Testimonial carousels
+- Chat widgets
+- Pop-ups
 
 ---
 
 ## Tech Stack
 
 ```
-Framework:    React + Vite
-Styling:      Tailwind CSS + Custom CSS
-Fonts:        Cormorant Garamond, Inter (Google Fonts)
+Frontend:     React 19 + TypeScript + Vite 7
+Styling:      Tailwind CSS 4 + Custom CSS
+Animation:    Framer Motion + CSS keyframes
+Scrolling:    Lenis (smooth scroll)
+Forms:        react-hook-form + zod + Formspree
 Hosting:      Vercel
+Repo:         github.com/solohb5/solo-landing
 ```
 
 ---
 
-## Quality Standard
+## Key Design Decisions
 
-This site should make someone stop and say "holy shit, that's beautiful" — not because of flashy effects, but because every single pixel feels intentional.
+| Decision | Rationale |
+|----------|-----------|
+| Single animation (heartbeat) | Restraint IS the premium |
+| No navigation | Single page, nowhere else to go |
+| Form modal, not page | Keep flow, reduce friction |
+| 4 color modes | Playful discovery, memorable interaction |
+| Hollow text effects | Editorial, Obys-inspired sophistication |
+| 3-week waitlist messaging | Creates demand, filters serious inquiries |
+
+---
+
+## The Standard
+
+This site should make someone stop and say "holy shit, that's beautiful" — not because of flashy effects, but because every pixel feels intentional.
 
 The stillness is the statement. The heartbeat is the soul.
 
 ---
 
-## Key Decisions
+## Important Links
 
-| Decision | Why |
+| Resource | URL |
 |----------|-----|
-| Single animation (heartbeat) | Restraint IS the premium |
-| No navigation | Single page, nowhere to go but down |
-| No form, just email | Reduces friction, feels human |
-| 50 BPM pulse | Slower than heart rate = calm, confident |
-| Charcoal not black | Warmer, more premium |
-
----
-
-## Assets
-
-| File | Location | Purpose |
-|------|----------|---------|
-| solo-logo-light.svg | assets/logos/ | Main logo (cream on dark) |
-| solo-square.svg | assets/logos/ | Animated square (change to gold) |
-| jovanny-screenshot.png | TBD | Case study mockup |
+| Formspree Endpoint | `https://formspree.io/f/xnjaavby` |
+| Jovanny's Site | `https://www.theedgeofhonor.com` |
+| GitHub | `github.com/solohb5/solo-landing` |
+| Vercel Dashboard | (check your Vercel account) |
+| Reference: Obys | `https://obys.agency` |
