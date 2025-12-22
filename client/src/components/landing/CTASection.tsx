@@ -10,7 +10,7 @@ export function CTASection({ onOpenProject }: CTASectionProps) {
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
   return (
-    <section ref={ref} className="py-12 md:py-20 px-6 md:px-12 max-w-[1400px] mx-auto">
+    <section ref={ref} className="py-24 md:py-40 px-6 md:px-12 max-w-[1400px] mx-auto">
       <div onClick={onOpenProject} className="block group cursor-pointer">
         <div className="flex flex-col gap-4">
           {/* Number */}

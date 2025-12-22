@@ -9,7 +9,7 @@ export function ProofSection() {
   
   return (
     <>
-      <section ref={ref} className="py-12 md:py-20 px-6 md:px-12 max-w-[1400px] mx-auto overflow-hidden">
+      <section ref={ref} className="py-24 md:py-40 px-6 md:px-12 max-w-[1400px] mx-auto overflow-hidden">
          <motion.div  
            initial={{ opacity: 0, y: 20 }}
            whileInView={{ opacity: 1, y: 0 }}
