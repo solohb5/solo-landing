@@ -210,25 +210,17 @@ export default function LandingPage() {
       {/* The Big Reveal - Separate section for drama */}
       <section className="pt-8 md:pt-12 pb-16 md:pb-24 px-6 md:px-12 max-w-[1400px] mx-auto">
         <motion.div
-          ref={workRef}
           initial={{ opacity: 0, y: 80 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          className="group cursor-pointer"
         >
-          <h2 
-            className={cn(
-              "font-display font-light text-[14vw] md:text-[12vw] leading-[0.8] uppercase tracking-tight work-hollow",
-              workInView && "work-revealed"
-            )}
-          >
+          <h2 className="font-display font-light text-[14vw] md:text-[12vw] leading-[0.8] uppercase tracking-tight work-hollow">
             Then we go
           </h2>
           <h2 
-            className={cn(
-              "font-display font-light text-[14vw] md:text-[12vw] leading-[0.8] uppercase tracking-tight work-hollow",
-              workInView && "work-revealed"
-            )}
+            className="font-display font-light text-[14vw] md:text-[12vw] leading-[0.8] uppercase tracking-tight work-hollow"
             style={{ transitionDelay: "0.1s" }}
           >
             to work.
