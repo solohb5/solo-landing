@@ -14,9 +14,16 @@ import { motion } from "framer-motion";
 
 import { SpotlightText } from "@/components/landing/SpotlightText";
 import { StrikethroughReveal } from "@/components/ui/StrikethroughReveal";
+import { useInView, useIsTouchDevice } from "@/hooks/useInView";
+import { cn } from "@/lib/utils";
 
 export default function LandingPage() {
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
+  const isTouch = useIsTouchDevice();
+  const { ref: workRef, isInView: workInView } = useInView<HTMLDivElement>({ 
+    threshold: 0.3,
+    triggerOnce: true 
+  });
 
   useEffect(() => {
     // Initialize Lenis for smooth scrolling
@@ -203,15 +210,27 @@ export default function LandingPage() {
       {/* The Big Reveal - Separate section for drama */}
       <section className="py-16 md:py-24 px-6 md:px-12 max-w-[1400px] mx-auto">
         <motion.div
+          ref={workRef}
           initial={{ opacity: 0, y: 80 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h2 className="font-body font-extrabold text-[14vw] md:text-[12vw] leading-[0.8] text-solo-accent uppercase tracking-tighter">
+          <h2 
+            className={cn(
+              "font-display font-light text-[14vw] md:text-[12vw] leading-[0.8] uppercase tracking-tight work-hollow",
+              workInView && "work-revealed"
+            )}
+          >
             Then we go
           </h2>
-          <h2 className="font-body font-extrabold text-[14vw] md:text-[12vw] leading-[0.8] text-solo-accent uppercase tracking-tighter">
+          <h2 
+            className={cn(
+              "font-display font-light text-[14vw] md:text-[12vw] leading-[0.8] uppercase tracking-tight work-hollow",
+              workInView && "work-revealed"
+            )}
+            style={{ transitionDelay: "0.1s" }}
+          >
             to work.
           </h2>
         </motion.div>
