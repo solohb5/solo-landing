@@ -99,7 +99,7 @@ export default function LandingPage() {
       </ContentSection>
 
       {/* Section 02 - Custom Layout */}
-      <section className="py-12 md:py-20 px-6 md:px-12 max-w-[1400px] mx-auto">
+      <section className="py-24 md:py-40 px-6 md:px-12 max-w-[1400px] mx-auto">
         <div className="flex flex-col gap-8 md:gap-12">
            {/* Number */}
            <motion.div 
@@ -150,7 +150,7 @@ export default function LandingPage() {
       </section>
 
       {/* Section 03 - The Process */}
-      <section className="pt-20 md:pt-32 pb-12 md:pb-16 px-6 md:px-12 max-w-[1400px] mx-auto">
+      <section className="pt-24 md:pt-40 pb-12 md:pb-16 px-6 md:px-12 max-w-[1400px] mx-auto">
         <div className="flex flex-col gap-6 md:gap-10">
           {/* Number */}
           <motion.div 

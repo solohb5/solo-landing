@@ -14,7 +14,7 @@ export function ContentSection({ number, children, className, noRule = false }: 
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
   return (
-    <section ref={ref} className={cn("py-12 md:py-20 px-6 md:px-12 max-w-[1400px] mx-auto", className)}>
+    <section ref={ref} className={cn("py-24 md:py-40 px-6 md:px-12 max-w-[1400px] mx-auto", className)}>
       <div className="flex flex-col gap-8 md:gap-12">
         {/* Number */}
         <motion.div 
