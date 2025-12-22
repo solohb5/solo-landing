@@ -29,14 +29,25 @@ export function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    // In a real app, this would submit the form
-    // For now, we'll just close the modal after a short delay
-    setTimeout(() => {
-      onClose();
-      form.reset();
-    }, 1000);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      const response = await fetch("https://formspree.io/f/xnjaavby", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      
+      if (response.ok) {
+        onClose();
+        form.reset();
+      } else {
+        console.error("Form submission failed");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+    }
   }
 
   // Prevent scroll when modal is open

@@ -95,6 +95,16 @@ The square in "SOLO▪" pulses like a heartbeat at 1.2s (50 BPM):
 
 ---
 
+## Important URLs & Services
+
+| Service | URL | Purpose |
+|---------|-----|---------|
+| Formspree | `https://formspree.io/f/xnjaavby` | Contact form submissions |
+| Jovanny Jones Site | `https://www.theedgeofhonor.com` | Case study link |
+| GitHub Repo | `github.com/solohb5/solo-landing` | Source code |
+
+---
+
 ## How to Run
 
 ```bash
