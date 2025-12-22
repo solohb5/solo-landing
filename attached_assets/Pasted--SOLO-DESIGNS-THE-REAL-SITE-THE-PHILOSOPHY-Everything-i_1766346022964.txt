@@ -1,0 +1,416 @@
+# SOLO DESIGNS — THE REAL SITE
+
+## THE PHILOSOPHY
+
+Everything is still. One thing is alive. That thing is a toy.
+
+This isn't a website. It's an experience that makes people click, explore, and remember.
+
+---
+
+## REFERENCE
+
+Study this: https://obys.agency
+
+Note:
+- The confidence of negative space
+- Section numbers are HUGE (italic serif)
+- Headlines are massive and editorial
+- Thin horizontal rules as dividers
+- Footer as a proper composition (columns: Socials, Address, Contact)
+- The whole thing breathes
+
+---
+
+## LAYOUT ARCHITECTURE
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ [■]                                              Waitlist   │
+│  ↑                                                    ↑     │
+│  pulsing square                               simple link   │
+│  (clickable - changes site color)                           │
+│                                                             │
+│                                                             │
+│                                                             │
+│                         Finally.                            │
+│                  A website that feels like you.             │
+│                                                             │
+│                                                             │
+│                                                             │
+│                                                             │
+│                                              SOLO ■         │
+│                                                ↑            │
+│                                         logo + small square │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Fixed Elements (Always Visible)
+- **Top-left:** The pulsing square (24×24px). Clickable.
+- **Top-right:** "Waitlist" — simple text link, no button styling
+- **Bottom-right:** "SOLO" + small square (the full logo, smaller scale)
+
+### Scrolling Content
+Everything else scrolls normally beneath these fixed elements.
+
+---
+
+## THE COLOR MODE SYSTEM
+
+Clicking the top-left square cycles through color modes:
+
+| Mode | Background | Text | Accent | Square |
+|------|------------|------|--------|--------|
+| **Gold** (default) | #1A1A1A | #F5F2EB | #C9A227 | Gold |
+| **Electric** | #1A1A1A | #F5F2EB | #00FF88 | Green |
+| **Deep** | #1A1A1A | #F5F2EB | #4D7CFF | Blue |
+| **Inverted** | #F5F2EB | #1A1A1A | #1A1A1A | Black |
+
+On click:
+1. Square rotates 90° (200ms, ease-out)
+2. All accent colors transition smoothly (300ms)
+3. Store preference in localStorage (optional)
+
+The pulsing animation continues in whatever the current accent color is.
+
+---
+
+## PAGE SECTIONS
+
+### HERO (100vh)
+
+Center of screen:
+```
+Finally.
+```
+- Font: Cormorant Garamond, 300 weight
+- Size: 140px desktop / 72px mobile
+- Below it (subtle): "A website that feels like you."
+- Size: 18px, 60% opacity
+
+No scroll indicator. Let them discover.
+
+---
+
+### SECTION 01: THE TRUTH
+
+```
+01
+
+You've built something real.
+Your website doesn't show it.
+```
+
+- "01" — Large italic serif (Cormorant Garamond Italic), 120px, accent color
+- Headline — 48px, regular weight
+- Second line — 60% opacity
+- Thin horizontal rule below (1px, 20% opacity)
+
+---
+
+### SECTION 02: THE WAY
+
+```
+02
+
+One conversation.
+Two weeks.
+Everything changes.
+```
+
+- Same pattern as Section 01
+- Each line on its own, stacked
+- Generous line-height (1.4)
+
+---
+
+### SECTION 03: THE PROOF (The Magic Section)
+
+```
+03
+
+[BROWSER MOCKUP - GRAYSCALE BY DEFAULT]
+```
+
+**THE COLOR REVEAL INTERACTION:**
+
+The browser mockup contains a screenshot of the Jovanny Jones site. By default, it's completely grayscale (CSS filter: grayscale(100%)).
+
+When the user moves their cursor over the image:
+- A circular area around the cursor reveals the FULL COLOR version
+- The circle is ~150px radius
+- It follows the cursor smoothly
+- The effect is like painting color onto a gray canvas
+
+**Technical approach:**
+- Two layers: grayscale on top, color beneath
+- The grayscale layer has a CSS mask that's a radial gradient
+- The mask position updates on mousemove
+- On touch devices: tap and hold reveals color in that spot
+
+Below the mockup:
+```
+Jovanny Jones — Executive Coach
+"I finally have a site that matches my work."
+```
+
+---
+
+### SECTION 04: THE DOOR (CTA)
+
+Following the Obys pattern exactly:
+
+```
+04          LET'S BUILD  →
+```
+
+- "04" on the left (italic, accent color)
+- "LET'S BUILD" massive (100px+), bold sans-serif
+- Arrow icon on the right
+- The whole thing is a link (mailto: or waitlist)
+- Thin horizontal rule below
+
+---
+
+### FOOTER
+
+Three columns, following Obys:
+
+```
+─────────────────────────────────────────────────────
+
+Connect                    Based                    Say Hi
+
+Instagram                  Nashville,               hello@solodesigns.co
+LinkedIn                   working globally
+                                          
+
+─────────────────────────────────────────────────────
+
+                                            Solo Designs © 2025
+```
+
+- Column headers: small, muted, uppercase
+- Content: regular weight, readable
+- Email is a link
+- Copyright centered at very bottom
+
+---
+
+## THE PULSING SQUARE
+
+```css
+@keyframes heartbeat {
+  0%, 100% { 
+    box-shadow: 0 0 0 rgba(var(--accent-rgb), 0);
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.5);
+    transform: scale(1.05);
+  }
+}
+
+.pulse-square {
+  width: 24px;
+  height: 24px;
+  background: var(--accent);
+  animation: heartbeat 1.2s ease-in-out infinite;
+  cursor: pointer;
+  transition: transform 200ms ease-out;
+}
+
+.pulse-square.clicked {
+  transform: rotate(90deg);
+}
+```
+
+The accent color is a CSS variable that changes when modes cycle.
+
+---
+
+## THE COLOR REVEAL EFFECT
+
+```jsx
+// Conceptual React approach
+function ColorReveal({ imageSrc }) {
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+  
+  return (
+    <div 
+      className="relative overflow-hidden"
+      onMouseMove={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        setMousePos({
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top
+        });
+      }}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
+      {/* Color layer (underneath) */}
+      <img src={imageSrc} className="w-full" />
+      
+      {/* Grayscale layer (on top, masked) */}
+      <img 
+        src={imageSrc} 
+        className="absolute inset-0 w-full grayscale"
+        style={{
+          maskImage: isHovering 
+            ? `radial-gradient(circle 150px at ${mousePos.x}px ${mousePos.y}px, transparent 0%, black 100%)`
+            : 'none'
+        }}
+      />
+    </div>
+  );
+}
+```
+
+---
+
+## TYPOGRAPHY
+
+| Element | Font | Size (Desktop) | Size (Mobile) | Weight |
+|---------|------|----------------|---------------|--------|
+| Hero "Finally." | Cormorant Garamond | 140px | 72px | 300 |
+| Section numbers | Cormorant Garamond Italic | 120px | 64px | 300 |
+| Section headlines | Cormorant Garamond | 48px | 32px | 400 |
+| Body / subtext | Inter | 18px | 16px | 400 |
+| Nav links | Inter | 14px | 14px | 500 |
+| Footer headers | Inter | 12px | 12px | 500 |
+
+Letter-spacing:
+- Headlines: -0.02em
+- Uppercase text: 0.1em
+- Body: 0
+
+---
+
+## SPACING
+
+- Section padding: 200px vertical (desktop), 120px (mobile)
+- Max content width: 1200px
+- Horizontal padding: 48px (desktop), 24px (mobile)
+- Between elements: 24px minimum
+
+---
+
+## COLORS (CSS Variables)
+
+```css
+:root {
+  /* Base */
+  --bg: #1A1A1A;
+  --text: #F5F2EB;
+  --text-muted: rgba(245, 242, 235, 0.6);
+  --rule: rgba(245, 242, 235, 0.2);
+  
+  /* Accent (changes with mode) */
+  --accent: #C9A227;
+  --accent-rgb: 201, 162, 39;
+}
+
+[data-mode="electric"] {
+  --accent: #00FF88;
+  --accent-rgb: 0, 255, 136;
+}
+
+[data-mode="deep"] {
+  --accent: #4D7CFF;
+  --accent-rgb: 77, 124, 255;
+}
+
+[data-mode="inverted"] {
+  --bg: #F5F2EB;
+  --text: #1A1A1A;
+  --text-muted: rgba(26, 26, 26, 0.6);
+  --rule: rgba(26, 26, 26, 0.2);
+  --accent: #1A1A1A;
+  --accent-rgb: 26, 26, 26;
+}
+```
+
+---
+
+## INTERACTIONS
+
+| Element | Hover | Click |
+|---------|-------|-------|
+| Pulsing square | Glow intensifies | Rotates 90°, cycles color mode |
+| Waitlist link | Underline appears | Goes to waitlist/mailto |
+| CTA "LET'S BUILD →" | Arrow moves right 8px | Goes to waitlist/mailto |
+| Footer links | Color → accent | Navigate |
+| Browser mockup | Color reveals under cursor | — |
+
+---
+
+## WHAT DOES NOT EXIST
+
+- Navigation menu
+- Hamburger icon
+- Multiple pages
+- Contact form
+- Social icons in header
+- Trust badges
+- Scroll animations on text (text just exists)
+- Parallax
+- Custom cursor
+- Loading screen
+- Cookie banner
+
+---
+
+## ASSETS NEEDED
+
+1. `solo-logo-light.svg` — For bottom-right placement (cream version)
+2. `solo-square.svg` — For top-left pulsing element (will be colored via CSS)
+3. `jovanny-screenshot.png` — Full color screenshot of the case study site
+
+---
+
+## MOBILE CONSIDERATIONS
+
+- Pulsing square: top-left, same position
+- "Waitlist": top-right, same position  
+- Logo: bottom-right, same position
+- Color reveal: On tap-and-hold, color reveals in a static circle at touch point
+- Color mode: Tapping square still cycles colors
+- All text scales down proportionally
+
+---
+
+## THE FEELING
+
+Someone lands. Black screen. Gold square pulsing in the corner. "Finally." in the center.
+
+They scroll. Big italic numbers. Confident statements. 
+
+They reach the screenshot. Gray. Dead. They move their cursor — color blooms like magic. They play with it. They get it.
+
+They see "LET'S BUILD →" — massive, bold, undeniable.
+
+They notice the square is still pulsing. They click it. The world turns electric green. They click again. Blue. Again. The whole site inverts to white.
+
+They think: "This is different."
+
+They click "Waitlist."
+
+---
+
+## QUALITY CHECKLIST
+
+- [ ] Square pulses smoothly at 1.2s intervals
+- [ ] Color mode transitions are smooth (300ms)
+- [ ] Square rotates on click
+- [ ] Color reveal follows cursor precisely
+- [ ] Color reveal works on mobile (tap-hold)
+- [ ] Typography is crisp and properly sized
+- [ ] Spacing is generous — nothing feels cramped
+- [ ] Section numbers are dramatically large
+- [ ] Footer is properly composed in columns
+- [ ] Horizontal rules are subtle but present
+- [ ] Fixed elements don't interfere with scrolling content
+- [ ] The site feels like Obys-level quality
+- [ ] Someone would screenshot this and share it

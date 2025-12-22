@@ -1,0 +1,553 @@
+# SOLO DESIGNS — THE REAL BUILD
+
+## REFERENCE: ACTUAL OBYS
+
+Go to https://obys.agency right now. Study it. This is what we're matching:
+
+**What Obys actually does:**
+- Loading screen with 0-100 counter
+- Massive bold typography (not whispered, not minimal)
+- Scrolling horizontal marquees ("fashion sport technology" repeating)
+- Section numbers 01, 02, 03, 04 — HUGE
+- Project cards with: name, services, year
+- Awards displayed proudly
+- Doubled/repeated text for playfulness ("Let's create Let's create")
+- "Scroll Scroll" at the bottom
+- Full navigation in corners
+- Custom cursor that responds to hover states
+- Noise/grain texture overlay
+
+**What Obys is NOT:**
+- Quiet
+- Minimal
+- Restrained
+- Shy about their work
+
+---
+
+## SOLO'S UNIQUE ELEMENTS
+
+These are the things that make Solo different from Obys:
+
+1. **Color Mode Cycling** — Click the pulsing square, world changes color
+2. **Color Reveal on Case Study** — Grayscale screenshot, cursor reveals color
+3. **The Pulsing Square** — Solo's signature, the heartbeat
+
+Keep these. They're good. They're ours.
+
+---
+
+## ASSETS TO USE
+
+```
+/client/src/assets/logos/solo-logo-light.svg  — Cream logo for dark backgrounds
+/client/src/assets/logos/solo-logo-dark.svg   — Dark logo for light mode
+/client/src/assets/logos/solo-square.svg      — Just the square mark
+```
+
+**USE THESE.** The logo should be visible and prominent. We spent time on it.
+
+---
+
+## PAGE STRUCTURE
+
+### LOADING SCREEN
+
+Like Obys but Solo-flavored:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                                                             │
+│                                                             │
+│                           ■                                 │
+│                      (pulsing)                              │
+│                                                             │
+│                         0-100                               │
+│                                                             │
+│                  your brand home is                         │
+│                   loading right now                         │
+│                                                             │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+- Pulsing square centered, larger than usual (48px)
+- Counter below: 0 → 100 over ~2.5 seconds
+- Tagline faded below counter
+- Everything fades out, content fades in
+
+---
+
+### FIXED ELEMENTS (Always Visible)
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ [■]                                    home  work  contact  │
+│  ↑ pulsing square                                           │
+│  click = cycle colors                                       │
+│                                                             │
+│                                                             │
+│                     [ CONTENT ]                             │
+│                                                             │
+│                                                             │
+│                                                             │
+│ Scroll                                   [SOLO LOGO SVG]    │
+│ Scroll                                                      │
+└─────────────────────────────────────────────────────────────┘
+```
+
+| Position | Element |
+|----------|---------|
+| Top-left | Pulsing square (24px), clickable, cycles color modes |
+| Top-right | Navigation: "home  work  contact" — simple text links |
+| Bottom-left | "Scroll" repeated twice, stacked, faded |
+| Bottom-right | Actual SVG logo (solo-logo-light.svg), sized ~120px wide |
+
+---
+
+### SECTION 01 — HERO
+
+```
+Solo—
+Brand Homes
+For Personal
+Brands ■
+```
+
+- "Solo—" on its own line, like "Obys—"
+- Rest stacked massively
+- Pulsing square inline after "Brands"
+- Typography: Bold sans-serif (Inter 700 or 800), ~10-12vw
+- Max-width so it doesn't stretch too wide on big screens
+
+**Below hero, small and faded:**
+```
+For speakers, coaches, creators, and founders
+who've outgrown their template.
+```
+
+---
+
+### SCROLLING MARQUEE
+
+Full-width horizontal scroll, infinite loop:
+
+```
+speakers ■ coaches ■ creators ■ podcasters ■ founders ■ speakers ■ coaches ■ creators ■ podcasters ■ founders ■
+```
+
+- Each word separated by a small pulsing square
+- Scrolls continuously left-to-right
+- Background slightly different (subtle stripe or opacity change)
+- Text: uppercase, tracking wide, ~14px
+- Speed: smooth, not too fast
+
+---
+
+### SECTION 02 — THE PROBLEM
+
+```
+02
+
+Your audience knows your voice.
+Your website sounds like a stranger.
+```
+
+- "02" massive italic serif (Cormorant), accent color, 120px+
+- Headlines: 48-64px serif
+- Second line muted (60% opacity)
+- Thin horizontal rule below
+
+---
+
+### SECTION 03 — WHAT WE DO
+
+```
+03
+
+We build the digital home
+for people who are the product.
+
+Not landing pages.
+Not funnels.
+Websites that could only be yours.
+```
+
+- Same giant "03" treatment
+- Main statement bold
+- Secondary lines muted
+- Horizontal rule below
+
+---
+
+### SECTION 04 — THE WORK (Color Reveal)
+
+```
+04
+
+our work
+```
+
+Then the browser mockup with color reveal effect:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  ● ● ●                                                      │
+│ ┌─────────────────────────────────────────────────────────┐ │
+│ │                                                         │ │
+│ │              [JOVANNY SCREENSHOT]                       │ │
+│ │                                                         │ │
+│ │         Grayscale default.                              │ │
+│ │         Cursor reveals color in 150px radius.           │ │
+│ │                                                         │ │
+│ └─────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────┘
+
+JOVANNY JONES                                              2024
+Executive Coach                               Brand, Website, Copy
+```
+
+**Below mockup:**
+- Client name left, year right
+- Role/title left, services right
+- Layout like Obys project cards
+
+**The testimonial:**
+```
+"For the first time, my site feels like me."
+```
+Italic, 32px, slightly muted
+
+**Horizontal rule below**
+
+---
+
+### SECTION 05 — CTA
+
+Like Obys "Let's create Let's create":
+
+```
+05
+
+Let's build
+Let's build →
+```
+
+- "05" giant italic accent
+- "Let's build" massive (100px+), bold
+- Repeated twice, stacked
+- Second line has arrow
+- Whole thing is a link
+- On hover: text goes hollow/outline, arrow moves right
+
+---
+
+### FOOTER
+
+Three columns, Obys style:
+
+```
+─────────────────────────────────────────────────────────────
+
+SOCIALS                    BASED                      SAY HI
+
+Instagram                  Nashville,                 hello@solodesigns.co
+LinkedIn                   working globally
+
+─────────────────────────────────────────────────────────────
+
+Scroll                                          Solo Designs © 2025
+Scroll                                          [small logo mark ■]
+```
+
+---
+
+## COLOR MODES
+
+Click the pulsing square to cycle:
+
+| Mode | Background | Text | Accent | Vibe |
+|------|------------|------|--------|------|
+| **Gold** (default) | #1A1A1A | #F5F2EB | #C9A227 | Warm, premium |
+| **Forest** | #0F1A14 | #E8F5E9 | #4ADE80 | Natural, fresh |
+| **Ocean** | #0F141A | #E3F2FD | #60A5FA | Cool, calm |
+| **Light** | #F5F2EB | #1A1A1A | #C9A227 | Inverted, airy |
+
+On click:
+1. Square rotates 90° (200ms)
+2. All colors transition (300ms ease)
+3. Logo swaps if needed (light mode = dark logo)
+
+---
+
+## TYPOGRAPHY
+
+| Element | Font | Size (Desktop) | Weight |
+|---------|------|----------------|--------|
+| Hero "Solo—" | Inter | 10vw | 800 |
+| Hero stack | Inter | 10vw | 800 |
+| Section numbers | Cormorant Garamond | 120px | 300 italic |
+| Section headlines | Cormorant Garamond | 48-64px | 400 |
+| Body / secondary | Inter | 16-18px | 400 |
+| Marquee | Inter | 14px | 500 |
+| Navigation | Inter | 14px | 500 |
+| CTA "Let's build" | Inter | 100px | 700 |
+
+---
+
+## THE SCROLLING MARQUEE (Technical)
+
+```jsx
+function Marquee() {
+  const items = ['speakers', 'coaches', 'creators', 'podcasters', 'founders'];
+  
+  // Double the array for seamless loop
+  const doubled = [...items, ...items];
+  
+  return (
+    <div className="marquee-container overflow-hidden py-8 bg-[rgba(255,255,255,0.02)]">
+      <div className="marquee-track flex animate-marquee">
+        {doubled.map((item, i) => (
+          <span key={i} className="flex items-center gap-8 px-8">
+            <span className="text-[14px] uppercase tracking-[0.2em]" style={{color: 'var(--text-muted)'}}>
+              {item}
+            </span>
+            <span className="w-2 h-2 bg-[var(--accent)] animate-pulse" />
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+```css
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+```
+
+---
+
+## THE COLOR REVEAL (Keep This)
+
+Already working. The grayscale-to-color reveal on hover is unique to Solo. Keep it exactly as built.
+
+---
+
+## THE PULSING SQUARE (Keep This)
+
+Already working. The heartbeat animation at 1.2s is the signature. Keep it.
+
+---
+
+## INTERACTIONS
+
+| Element | Hover | Click |
+|---------|-------|-------|
+| Pulsing square | Glow intensifies | Rotates 90°, cycles mode |
+| Nav links | Underline slides in | Navigate |
+| "Let's build" | Text goes hollow/outline, arrow moves | Navigate to contact |
+| Project card | Subtle lift, glow | — |
+| Marquee | Pauses | — |
+| Custom cursor | Grows on interactive elements | — |
+
+---
+
+## CUSTOM CURSOR
+
+Keep it. Obys has one. Make it:
+- 12px square (not circle)
+- Accent color
+- `mix-blend-mode: difference`
+- Grows/rotates on hover over interactive elements
+- Hidden on mobile/touch
+
+---
+
+## NOISE TEXTURE
+
+Keep it. Subtle grain overlay adds richness. Make sure it's:
+- Very subtle (opacity 0.03-0.05)
+- Fixed position
+- Pointer-events: none
+- Animated slightly for life
+
+---
+
+## SCROLL INDICATOR
+
+Keep it. Obys says "Scroll Scroll" literally. We have:
+```
+Scroll
+Scroll
+```
+Bottom-left, stacked, faded. Plus the animated line. Good.
+
+---
+
+## LOADING EXPERIENCE
+
+```jsx
+function LoadingScreen({ onComplete }) {
+  const [count, setCount] = useState(0);
+  
+  useEffect(() => {
+    const duration = 2500; // 2.5 seconds
+    const steps = 100;
+    const interval = duration / steps;
+    
+    const timer = setInterval(() => {
+      setCount(prev => {
+        if (prev >= 100) {
+          clearInterval(timer);
+          setTimeout(onComplete, 300);
+          return 100;
+        }
+        return prev + 1;
+      });
+    }, interval);
+    
+    return () => clearInterval(timer);
+  }, []);
+  
+  return (
+    <div className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-[var(--bg)]">
+      {/* Large pulsing square */}
+      <div className="pulse-square w-12 h-12 mb-8" />
+      
+      {/* Counter */}
+      <div className="font-mono text-[48px] tabular-nums" style={{color: 'var(--text)'}}>
+        {count.toString().padStart(3, '0')}
+      </div>
+      
+      {/* Tagline */}
+      <p className="mt-4 text-[14px] tracking-[0.1em] uppercase" style={{color: 'var(--text-muted)'}}>
+        your brand home is loading
+      </p>
+    </div>
+  );
+}
+```
+
+---
+
+## THE LOGO — USE IT
+
+The SVG logo goes:
+1. **Loading screen** — Optional, could show after counter
+2. **Bottom-right fixed** — Main placement, ~100-120px wide
+3. **Footer** — Small mark next to copyright
+
+```jsx
+import soloLogoLight from "@/assets/logos/solo-logo-light.svg";
+import soloLogoDark from "@/assets/logos/solo-logo-dark.svg";
+
+function FixedLogo({ colorMode }) {
+  const logo = colorMode === 'light' ? soloLogoDark : soloLogoLight;
+  
+  return (
+    <div className="fixed-element bottom-8 right-12">
+      <img src={logo} alt="Solo Designs" className="h-8 w-auto" />
+    </div>
+  );
+}
+```
+
+---
+
+## RESPONSIVE BEHAVIOR
+
+**Desktop (1200px+):**
+- Full experience
+- Custom cursor visible
+- Marquee at full speed
+- All fixed elements in corners
+
+**Tablet (768-1199px):**
+- Reduce hero text size
+- Stack navigation vertically if needed
+- Keep all interactions
+
+**Mobile (<768px):**
+- No custom cursor
+- Touch-friendly tap targets
+- Marquee still scrolls
+- Color reveal works with tap-hold
+- Fixed elements adjust to safe areas
+- Hero stacks more aggressively
+
+---
+
+## WHAT MAKES THIS PROUD-WORTHY
+
+1. **The logo is visible** — You see Solo, you remember Solo
+2. **The loading is an experience** — Not friction, anticipation
+3. **The color modes are playful** — A toy people will share
+4. **The color reveal is magic** — Shows what we do without saying it
+5. **The typography is confident** — Bold when bold, elegant when elegant
+6. **The marquee adds movement** — Life without chaos
+7. **The structure is Obys-tier** — 01, 02, 03, 04, proper footer
+8. **The CTA is undeniable** — "Let's build Let's build →"
+9. **It's one page, one scroll, one decision** — Come, see, act
+
+---
+
+## THE COMPLETE FLOW
+
+1. **Load:** Black screen, pulsing square, 0→100, "your brand home is loading"
+2. **Reveal:** Content fades in, fixed elements appear
+3. **Hero:** "Solo— Brand Homes For Personal Brands ■"
+4. **Marquee:** speakers ■ coaches ■ creators ■ (scrolling)
+5. **Problem:** "Your website sounds like a stranger"
+6. **Solution:** "We build the digital home for people who are the product"
+7. **Proof:** Color reveal screenshot, testimonial
+8. **CTA:** "Let's build Let's build →"
+9. **Footer:** Socials, location, email, logo
+
+They click the square. World turns green. They smile. They click "Let's build."
+
+---
+
+## QUALITY CHECKLIST
+
+Before shipping:
+
+- [ ] Logo SVG is visible and crisp
+- [ ] Loading counter runs smoothly 0-100
+- [ ] Pulsing square pulses on brand (1.2s)
+- [ ] Color modes cycle correctly (4 modes)
+- [ ] Marquee scrolls infinitely, seamlessly
+- [ ] Section numbers are MASSIVE and italic
+- [ ] Color reveal follows cursor precisely
+- [ ] "Let's build" goes hollow on hover
+- [ ] Custom cursor works (desktop only)
+- [ ] Noise texture is subtle but present
+- [ ] Mobile is fully functional
+- [ ] Someone would screenshot this
+- [ ] We're proud to send this link
+
+---
+
+## THE ENERGY
+
+This site should feel like:
+- A confident handshake
+- An agency that costs more than you expected
+- Someone who knows exactly who they are
+- Playful but not silly
+- Bold but not aggressive
+- Premium but not pretentious
+
+When someone lands here, they should think:
+
+**"These people know what they're doing."**
+
+---
+
+Now build it. Make it undeniable. Make us proud.

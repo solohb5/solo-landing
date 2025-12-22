@@ -6,90 +6,157 @@
 
 ## What Is This?
 
-**One-liner:** A premium landing page for Solo Designs — where high-performers book design consultations.
+**One-liner:** A premium single-page landing site for Solo Designs — where stillness is the statement and the heartbeat is the soul.
 
-**The Problem:** You need a place to send potential clients that immediately communicates your value.
+**The Philosophy:** Everything is still. One thing is alive. That's enough.
 
-**The User:** High-performers, founders, professionals who want their digital presence to match their expertise. They arrive from "BY SOLO DESIGNS" links in client site footers (e.g., theedgeofhonor.com) — they've already seen the quality of work.
-
-**The Vision:** A page so stunning that designers screenshot it for inspiration. It should make booking a conversation feel inevitable.
+**The User:** High-performers who've seen "BY SOLO DESIGNS" on client sites. They already know the quality. This page confirms it and opens the door.
 
 ---
 
-## The Aesthetic
+## The Signature
 
-The blob is the centerpiece — a living, breathing generative art piece that:
-- Morphs between human silhouettes (representing clients being transformed)
-- Changes colors organically (blue → teal → green, continuous drift)
-- Responds to mouse movement and scroll
-- Feels premium, artistic, not template-y
+The gold square in "SOLO▪" pulses like a heartbeat — the ONLY animation on the entire site.
 
-**Key Message:** "We don't make websites. We create digital legacies."
+This creates a sense that the brand is alive, breathing, waiting.
+
+**1.2 seconds per beat** (50 BPM — slower than resting heart rate, feels calm and confident)
 
 ---
 
-## Core Features
+## Design System
 
-| Feature | Description | Status |
-|---------|-------------|--------|
-| Morphing Blob | WebGL canvas with silhouette morphing | ✅ Done |
-| 3 Silhouettes | Man portrait, front-facing, celebrate | ✅ Done |
-| Color Transitions | Blue → Teal → Green organic drift | ✅ Done |
-| Hero Section | "Story-driven design" + "Let's build your digital legacy" | ✅ Done |
-| Quote Section | Scrolling reveal animation | ✅ Done |
-| Booking Dialog | Contact form with Formspree | ✅ Done |
-| Mobile Responsive | Works on all devices | ✅ Done |
-| Custom Cursor | Context-aware cursor with magnetic buttons | ✅ Done |
+### Colors
+
+| Role | Hex | Usage |
+|------|-----|-------|
+| Background | #1A1A1A | Charcoal (NOT pure black) |
+| Primary | #F5F2EB | Headlines, body (warm cream) |
+| Secondary | #8A8780 | Subtle text (warm stone) |
+| Accent | #C9A227 | The square, numbers, CTA hover (warm gold) |
+
+### Typography
+
+| Element | Font | Notes |
+|---------|------|-------|
+| Hero word | Cormorant Garamond 300 | 120px desktop, 64px mobile |
+| Section numbers | Inter 500 | Gold, uppercase |
+| Body headlines | Cormorant Garamond 400 | 36px desktop |
+| Body text | Inter 400 | 18px, 1.8 line-height |
+| CTA | Inter 500 | Uppercase, 0.1em tracking |
+
+---
+
+## Page Structure
+
+```
+┌─────────────────────────────────────┐
+│            HERO (100vh)             │
+│                                     │
+│           [SOLO▪ logo]              │
+│                                     │
+│             Finally.                │
+│    A website that feels like you.   │
+│                ↓                    │
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│          SECTION 01: TRUTH          │
+│  01 ▪                               │
+│  You've built something real.       │
+│  Your website doesn't show it.      │
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│          SECTION 02: WAY            │
+│  02 ▪                               │
+│  One conversation. Two weeks.       │
+│  Brand, copy, site — from truth.    │
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│         SECTION 03: PROOF           │
+│  03 ▪                               │
+│  [Browser mockup — Jovanny]         │
+│  "I finally have a site..."         │
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│          SECTION 04: DOOR           │
+│  Your legacy deserves more than     │
+│  a template.                        │
+│                                     │
+│          [ Begin → ]                │
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│              FOOTER                 │
+│             SOLO▪                   │
+│        hello@solodesigns.co         │
+└─────────────────────────────────────┘
+```
+
+---
+
+## Interactions
+
+| Element | Behavior |
+|---------|----------|
+| Gold squares | Pulse (heartbeat) at 1.2s |
+| CTA button | Gold fill on hover, text inverts |
+| Footer links | Square rotates 45° to diamond |
+
+---
+
+## What Does NOT Exist
+
+- Navigation menu / hamburger
+- Multiple pages
+- Contact form (just email link)
+- Social icons
+- Scroll animations
+- Parallax effects
+- Custom cursor
+- Loading screen
+- Carousels / sliders
 
 ---
 
 ## Tech Stack
 
 ```
-Language:     TypeScript
-Framework:    React 19 + Vite
-Backend:      Express
-Styling:      Tailwind CSS 4
-Animation:    Framer Motion + Canvas/WebGL
-Generative:   SimplexNoise for organic movement
-UI:           Radix + shadcn/ui
-Hosting:      Vercel (vercel.json configured)
+Framework:    React + Vite
+Styling:      Tailwind CSS + Custom CSS
+Fonts:        Cormorant Garamond, Inter (Google Fonts)
+Hosting:      Vercel
 ```
 
 ---
 
-## What's Left
+## Quality Standard
 
-### Phase 1: Launch (NOW)
-- [ ] Push to Git
-- [ ] Deploy to Vercel
+This site should make someone stop and say "holy shit, that's beautiful" — not because of flashy effects, but because every single pixel feels intentional.
 
-### Phase 2: Polish (Optional)
-- [ ] Horizontal flip silhouettes for more variety
-- [ ] Add 1-2 more silhouettes
-- [ ] Calendly integration
-- [ ] Custom domain setup
+The stillness is the statement. The heartbeat is the soul.
 
 ---
 
 ## Key Decisions
 
-| Decision | Reasoning | Date |
-|----------|-----------|------|
-| Morphing blob over static image | Differentiates from templates, feels alive | Dec 2024 |
-| 3 energies (professional, direct, celebratory) | Represents client transformation journey | Dec 2024 |
-| 88% morph | Human recognizable but still organic/artistic | Dec 2024 |
-| Remove "The Work" section | Visitors already saw portfolio on client sites | Dec 2024 |
-| No pigeonholing copy | Appeals to anyone wanting premium digital presence | Dec 2024 |
+| Decision | Why |
+|----------|-----|
+| Single animation (heartbeat) | Restraint IS the premium |
+| No navigation | Single page, nowhere to go but down |
+| No form, just email | Reduces friction, feels human |
+| 50 BPM pulse | Slower than heart rate = calm, confident |
+| Charcoal not black | Warmer, more premium |
 
 ---
 
-## Files to Know
+## Assets
 
-| File | Purpose |
-|------|---------|
-| `client/src/pages/home.tsx` | Main page with MorphingBlob, hero, sections |
-| `client/src/assets/silhouettes/*.svg` | SVG silhouettes for morphing |
-| `client/src/index.css` | Global styles, animations |
-| `vercel.json` | Deployment config |
-
+| File | Location | Purpose |
+|------|----------|---------|
+| solo-logo-light.svg | assets/logos/ | Main logo (cream on dark) |
+| solo-square.svg | assets/logos/ | Animated square (change to gold) |
+| jovanny-screenshot.png | TBD | Case study mockup |

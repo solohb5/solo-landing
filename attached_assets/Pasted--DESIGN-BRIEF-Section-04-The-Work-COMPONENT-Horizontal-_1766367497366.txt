@@ -1,0 +1,91 @@
+**DESIGN BRIEF: Section 04 — The Work**
+
+---
+
+**COMPONENT: Horizontal Scroll Gallery**
+
+A horizontally scrolling showcase of project cards. Should be easy to add new projects — just drop in a screenshot and link.
+
+---
+
+**BEHAVIOR:**
+
+- Horizontal scroll on desktop (drag or scroll wheel when hovering)
+- Swipe on mobile
+- Smooth momentum scrolling
+- Each card has independent color reveal (grayscale → color on hover)
+- Clicking a card opens the live site in new tab
+
+---
+
+**EACH PROJECT CARD:**
+
+```
+┌─────────────────────────────────────┐
+│  ● ● ●                              │
+│  [SCREENSHOT WITH COLOR REVEAL]     │
+└─────────────────────────────────────┘
+CLIENT NAME                       YEAR
+Role / Description       What We Did
+```
+
+- Browser mockup frame (dark, minimal, three dots)
+- Screenshot inside with grayscale default, color reveals on hover
+- Client name left, year right
+- Description left, services right
+- Whole card links to live site
+
+---
+
+**DATA STRUCTURE:**
+
+```js
+const projects = [
+  {
+    name: "Jovanny Jones",
+    role: "Executive Coach",
+    year: "2024",
+    services: "Brand / Web / Copy",
+    screenshot: "/images/jovanny.png",
+    url: "https://jovannyjones.com"
+  },
+  // Add more here
+]
+```
+
+That's it. Add to the array, it appears in the gallery.
+
+---
+
+**PLACEHOLDER CARD (when less than 4 projects):**
+
+```
+┌─────────────────────────────────────┐
+│                                     │
+│           YOUR BRAND HERE           │
+│                ■                    │
+│                                     │
+└─────────────────────────────────────┘
+```
+
+Links to Begin / waitlist form. Subtle CTA.
+
+---
+
+**SIZING:**
+
+- Cards: ~400-500px wide on desktop, ~85vw on mobile
+- Gap between cards: 32px
+- Section has horizontal padding so first/last cards peek from edges
+
+---
+
+**PROGRESS INDICATOR (optional):**
+
+Small dots or thin progress bar below gallery showing scroll position. Not required but nice for 4+ projects.
+
+---
+
+**DONE.**
+
+Hand this to the team. When you get a new client, you add one object to the array and drop a screenshot in the folder.

@@ -1,0 +1,347 @@
+# SOLO DESIGNS — COMPLETE BUILD PROMPT
+
+**For: Replit Agent / Claude Code**
+
+---
+
+## ROLE
+
+You are an elite web developer who builds Awwwards-quality websites. Your work is indistinguishable from $50K agency output. You understand that premium isn't about adding features — it's about restraint, craft, and obsessive attention to detail.
+
+---
+
+## THE PROJECT
+
+Build a single-page landing site for **Solo Designs** — a boutique web design studio.
+
+**The philosophy:** Everything is still. One thing is alive. That's enough.
+
+**The signature:** The square in the Solo logo pulses like a heartbeat — the only animation on the entire site. This creates a sense that the brand is alive, breathing, waiting.
+
+---
+
+## DESIGN SYSTEM
+
+### Colors
+
+| Role | Hex | Usage |
+|------|-----|-------|
+| Background | #1A1A1A | Main background (charcoal, NOT pure black) |
+| Primary text | #F5F2EB | Headlines, body copy (warm cream) |
+| Secondary text | #8A8780 | Subtle text, labels (warm stone) |
+| Accent | #C9A227 | The square, section numbers, CTA hover (warm gold) |
+| Glow | rgba(201, 162, 39, 0.4) | Heartbeat pulse effect |
+
+### Typography
+
+| Element | Font | Size (Desktop) | Size (Mobile) | Weight | Notes |
+|---------|------|----------------|---------------|--------|-------|
+| Hero word | Cormorant Garamond | 120px | 64px | 300 (Light) | -0.02em letter-spacing |
+| Section numbers | Inter | 14px | 12px | 500 (Medium) | Gold (#C9A227), uppercase |
+| Body headlines | Cormorant Garamond | 36px | 28px | 400 | Warm cream |
+| Body text | Inter | 18px | 16px | 400 | 1.8 line-height |
+| CTA button | Inter | 16px | 14px | 500 | Uppercase, 0.1em letter-spacing |
+| Footer | Inter | 14px | 12px | 400 | Stone color (#8A8780) |
+
+**Font loading:**
+```html
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+```
+
+### Spacing (8px Grid)
+
+| Element | Desktop | Mobile |
+|---------|---------|--------|
+| Section padding (vertical) | 160px | 80px |
+| Content max-width | 800px | 90% |
+| Gap between text blocks | 32px | 24px |
+| Section number margin-bottom | 48px | 32px |
+
+---
+
+## THE HEARTBEAT ANIMATION
+
+This is the ONLY animation on the site. Everything else is static.
+
+**For CSS (if square is a div/span):**
+```css
+@keyframes heartbeat {
+  0%, 100% { 
+    box-shadow: 0 0 0 rgba(201, 162, 39, 0);
+    filter: brightness(1);
+  }
+  50% { 
+    box-shadow: 0 0 24px rgba(201, 162, 39, 0.5);
+    filter: brightness(1.1);
+  }
+}
+
+.square {
+  animation: heartbeat 1.2s ease-in-out infinite;
+}
+```
+
+**For SVG (if using the SVG path):**
+```css
+@keyframes heartbeat-svg {
+  0%, 100% { 
+    filter: drop-shadow(0 0 0 rgba(201, 162, 39, 0));
+    opacity: 1;
+  }
+  50% { 
+    filter: drop-shadow(0 0 16px rgba(201, 162, 39, 0.6));
+    opacity: 0.9;
+  }
+}
+
+.square-svg {
+  fill: #C9A227;
+  animation: heartbeat-svg 1.2s ease-in-out infinite;
+}
+```
+
+**Timing:** 1.2 seconds per beat (50 BPM — slower than resting heart rate, feels calm and confident)
+
+**Where it appears:**
+1. In the logo (the square after "SOLO") — can be separate SVG overlaid, or modify the logo SVG
+2. Next to each section number (small, 8px rendered square)
+3. Optionally: a small square in the bottom-right corner that persists on scroll
+
+---
+
+## HOVER INTERACTION: DIAMOND ROTATION
+
+When hovering over interactive elements (CTA button, footer links), the nearest square rotates 45° to become a diamond.
+
+```css
+.square-interactive {
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.square-interactive:hover {
+  transform: rotate(45deg);
+}
+```
+
+**CTA Button Hover:**
+- Border fills with gold (#C9A227)
+- Text inverts to charcoal (#1A1A1A)
+- Small square inside button rotates to diamond
+- Transition: 200ms
+
+---
+
+## PAGE STRUCTURE
+
+### SECTION: HERO (100vh)
+
+```
+[Solo logo — with pulsing square]
+
+# Finally.
+
+A website that feels like you.
+
+↓ (scroll indicator — thin gold line, 40px, subtle pulse)
+```
+
+**Layout:**
+- Logo: centered, 200px wide max
+- "Finally." — centered, massive (120px desktop)
+- Subhead — centered, 60% opacity
+- Scroll indicator — absolute bottom, centered, 32px from bottom
+
+**No navigation. No hamburger. Just this.**
+
+---
+
+### SECTION 01: THE TRUTH
+
+```
+01 ▪
+
+You've built something real.
+Your website doesn't show it.
+```
+
+**Layout:**
+- Section number + pulsing square: left-aligned or centered
+- Two lines of text, stacked
+- Generous whitespace (160px padding top/bottom)
+
+---
+
+### SECTION 02: THE WAY
+
+```
+02 ▪
+
+One conversation. We listen for what you can't say.
+Two weeks. Brand, copy, site — built from that truth.
+```
+
+**Layout:** Same as Section 01
+
+---
+
+### SECTION 03: THE PROOF
+
+```
+03 ▪
+
+[Browser mockup of Jovanny's site — glowing against dark background]
+
+Jovanny Jones — Executive Coach
+
+"I finally have a site that matches my work."
+```
+
+**Layout:**
+- Browser mockup: max-width 900px, subtle glow effect (box-shadow: 0 0 60px rgba(201, 162, 39, 0.15))
+- Name in gold, small caps
+- Quote in Cormorant Garamond italic
+
+**Browser mockup styling:**
+```css
+.browser-mockup {
+  background: #0A0A0A;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 
+    0 0 60px rgba(201, 162, 39, 0.15),
+    0 25px 50px rgba(0, 0, 0, 0.5);
+}
+
+.browser-mockup::before {
+  /* Three dots for browser chrome */
+  content: "● ● ●";
+  display: block;
+  color: #333;
+  font-size: 10px;
+  letter-spacing: 4px;
+  padding: 8px 12px;
+}
+```
+
+---
+
+### SECTION 04: THE DOOR
+
+```
+Your legacy deserves more than a template.
+
+[ Begin → ]
+```
+
+**CTA Button:**
+```css
+.cta {
+  border: 1px solid #C9A227;
+  background: transparent;
+  color: #F5F2EB;
+  padding: 16px 48px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cta:hover {
+  background: #C9A227;
+  color: #1A1A1A;
+}
+```
+
+---
+
+### FOOTER
+
+```
+SOLO▪
+hello@solodesigns.co
+```
+
+**Layout:**
+- Centered
+- Logo small (120px wide)
+- Email as plain text link
+- Padding: 80px top, 40px bottom
+- Border-top: 1px solid #2A2A2A (subtle separator)
+
+---
+
+## TECHNICAL REQUIREMENTS
+
+1. **Single HTML file** with embedded CSS and JS (or clean component structure if using React)
+2. **Fully responsive** — mobile-first approach
+3. **Smooth scroll behavior** — CSS `scroll-behavior: smooth`
+4. **No external dependencies** except Google Fonts
+5. **Performance:** No layout shift, minimal repaints
+6. **Accessibility:** 
+   - Proper heading hierarchy (h1 for "Finally", h2 for section titles)
+   - Focus states on interactive elements
+   - Reduced motion support: `@media (prefers-reduced-motion: reduce)` — disable heartbeat
+7. **Semantic HTML5**
+
+---
+
+## WHAT DOES NOT EXIST ON THIS SITE
+
+- Navigation menu
+- Hamburger icon
+- Multiple pages
+- Contact form (just email link)
+- Social media icons
+- Trust badges
+- Testimonial carousel
+- Animations on scroll (text just exists, no fade-ins)
+- Parallax effects
+- Custom cursor
+- Loading screen
+
+---
+
+## ASSETS PROVIDED
+
+1. `solo-logo-light.svg` — Full logo for dark backgrounds (cream #E5DCBB version) ✓ USE THIS
+2. `solo-logo-dark.svg` — Full logo for light backgrounds (dark version) — NOT USED on this site
+3. `solo-square.svg` — Just the square element for animations
+   - **NOTE:** This SVG has fill="#221300" (dark). Change to fill="#C9A227" (gold) for the heartbeat animation on dark background
+4. `jovanny-screenshot.png` — Browser screenshot of case study site (Hans to provide)
+
+---
+
+## QUALITY CHECKLIST
+
+Before considering this complete:
+
+- [ ] Does the heartbeat feel alive but not distracting?
+- [ ] Is every piece of text readable without squinting?
+- [ ] Does the site feel premium in the first 50 milliseconds?
+- [ ] Is there enough whitespace to breathe?
+- [ ] Does it work perfectly on mobile?
+- [ ] Are transitions smooth (200ms, proper easing)?
+- [ ] Is the hover diamond rotation subtle but noticeable?
+- [ ] Does the CTA button invite clicking?
+- [ ] Is there NOTHING that feels templated or generic?
+
+---
+
+## REFERENCE SITES (For Vibe)
+
+- obys.agency — Numbered sections, Swiss minimalism
+- locomotive.ca — Restraint, typography-forward
+- baseborn.studio — Warm, boutique feel
+
+---
+
+## THE STANDARD
+
+This site should make someone stop and say "holy shit, that's beautiful" — not because of flashy effects, but because every single pixel feels intentional.
+
+The stillness is the statement. The heartbeat is the soul.
+
+Build it.

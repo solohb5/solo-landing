@@ -80,16 +80,9 @@ app.use((req, res, next) => {
     await setupVite(httpServer, app);
   }
 
-  // ALWAYS serve the app on the port specified in the environment variable PORT
-  // Default to 3000 if not specified (5000 conflicts with AirPlay on macOS)
+  // Serve on port 3000
   const port = parseInt(process.env.PORT || "3000", 10);
-  httpServer.listen(
-    {
-      port,
-      host: "127.0.0.1",
-    },
-    () => {
-      log(`serving on port ${port}`);
-    },
-  );
+  httpServer.listen(port, "127.0.0.1", () => {
+    log(`serving on port ${port}`);
+  });
 })();

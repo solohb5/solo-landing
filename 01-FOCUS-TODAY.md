@@ -6,60 +6,92 @@
 
 ## Current Focus
 
-**STATUS: ✅ COMPLETE — Ready for Review/Deploy**
+**STATUS: 🔵 IN PROGRESS — Complete Rebuild**
 
-**Task:** Morphing blob with human silhouettes
+**Task:** Rebuild the site with "Stillness + Heartbeat" philosophy
 
-**Goal:** 
-- [x] Landing page working locally
-- [x] Custom morphing blob with human silhouettes
-- [x] 3 different silhouettes with unique color palettes
-- [ ] Push to Git
-- [ ] Deploy live
+**Philosophy:** Everything is still. One thing is alive. That's enough.
 
 ---
 
-## Latest Session (Dec 18, 2024)
+## The Rebuild (Dec 21, 2024)
 
-### What Was Accomplished
+### What We're Building
 
-1. **Morphing Blob Feature** — The centerpiece blob now morphs between 3 human silhouettes:
-   - **Man Portrait** (side profile, professional) → Electric Blue
-   - **Front-Facing** (looking directly at viewer) → Teal/Cyan  
-   - **Celebrate** (hands up, victory pose) → Vibrant Green/Gold
+A single-page landing site where:
+- The ONLY animation is the pulsing gold square (heartbeat)
+- Everything else is static, typography-forward, premium
+- No morphing blob, no scroll animations, no custom cursor
+- Pure restraint and craft
 
-2. **Technical Implementation:**
-   - SVG path parsing → polar coordinate conversion
-   - Gaussian smoothing + Catmull-Rom spline interpolation for smooth shapes
-   - 88% morph (human-recognizable but still organic blob feel)
-   - Smooth color transitions between palettes (~45 second cycle)
-   - Inner glow follows blob shape (not spherical)
+### The Heartbeat
 
-3. **Copy Updates:**
-   - Hero: "Story-driven design" label + "Let's build your digital legacy."
-   - Quote: "We don't make websites. We create digital legacies."
-   - Removed pigeonholing (no "for coaches, speakers, experts")
+The square in "SOLO▪" pulses like a heartbeat at 1.2s (50 BPM):
+- Subtle gold glow
+- Appears in logo, section numbers, and as persistent element
+- On hover: rotates 45° to become diamond
 
----
+### Page Structure
 
-## Key Files
-
-| File | What's There |
-|------|--------------|
-| `client/src/pages/home.tsx` | Main landing page with MorphingBlob component |
-| `client/src/assets/silhouettes/` | 3 SVG silhouettes: `man-sil.svg`, `front-sil.svg`, `celebrate-sil.svg` |
-| `client/src/index.css` | Custom styles, animations, color palette |
+1. **Hero** (100vh) — Logo + "Finally." + scroll indicator
+2. **Section 01: The Truth** — "You've built something real..."
+3. **Section 02: The Way** — Process (one conversation, two weeks)
+4. **Section 03: The Proof** — Jovanny case study with browser mockup
+5. **Section 04: The Door** — CTA "Begin →"
+6. **Footer** — Logo + email, that's it
 
 ---
 
-## Next Steps (For Next Agent)
+## Design System
 
-1. **Git Push** — Commit and push all changes
-2. **Deploy** — Push to production (Vercel via `vercel.json`)
-3. **Optional Polish:**
-   - Could add horizontal flip for more silhouette variety
-   - Could add more silhouettes for richer variation
-   - Calendly integration for booking
+| Role | Color |
+|------|-------|
+| Background | #1A1A1A (charcoal) |
+| Primary text | #F5F2EB (warm cream) |
+| Secondary | #8A8780 (stone) |
+| Accent | #C9A227 (gold) |
+
+| Font | Usage |
+|------|-------|
+| Cormorant Garamond 300/400 | Headlines, hero |
+| Inter 400/500 | Body, UI |
+
+---
+
+## What Does NOT Exist
+
+- Navigation/hamburger
+- Morphing blob
+- Scroll animations
+- Custom cursor
+- Contact form
+- Social icons
+- Loading screen
+- Parallax
+- Carousels
+
+---
+
+## Tasks
+
+- [ ] Update boards ← NOW
+- [ ] Rebuild home.tsx (minimal structure)
+- [ ] New index.css (exact design system)
+- [ ] Heartbeat animation
+- [ ] Hover diamond rotation
+- [ ] Browser mockup section
+- [ ] Mobile + accessibility
+
+---
+
+## Assets Ready
+
+| Asset | Location | Status |
+|-------|----------|--------|
+| solo-logo-light.svg | client/src/assets/logos/ | ✅ Ready |
+| solo-logo-dark.svg | client/src/assets/logos/ | ✅ Ready |
+| solo-square.svg | client/src/assets/logos/ | ✅ Ready (change fill to gold) |
+| jovanny-screenshot.png | — | ⏳ Hans to provide |
 
 ---
 
@@ -67,27 +99,7 @@
 
 ```bash
 cd Solo-Canvas
-npm run dev        # Starts on port 3000
+npm run dev
 ```
 
 Then visit `http://localhost:3000`
-
----
-
-## Blockers / Questions
-
-- None currently — site is working beautifully
-
----
-
-## Completed This Session
-
-- [x] Electric blue blob with organic movement
-- [x] Mouse reactivity and scroll reactivity
-- [x] Morphing to human silhouettes (man portrait, front-facing, celebrate)
-- [x] 3 unique color palettes (blue, teal, green/gold)
-- [x] Smooth color transitions between silhouettes
-- [x] Hero copy finalized
-- [x] Removed "The Work" section (visitors already saw the portfolio)
-- [x] Inner glow follows blob shape organically
-
