@@ -150,7 +150,7 @@ export default function LandingPage() {
       </section>
 
       {/* Section 03 - The Process */}
-      <section className="py-20 md:py-32 px-6 md:px-12 max-w-[1400px] mx-auto">
+      <section className="pt-20 md:pt-32 pb-8 md:pb-12 px-6 md:px-12 max-w-[1400px] mx-auto">
         <div className="flex flex-col gap-6 md:gap-10">
           {/* Number */}
           <motion.div 
@@ -171,11 +171,11 @@ export default function LandingPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="font-body font-extrabold text-[12vw] md:text-[9vw] leading-[0.85] text-solo-text uppercase tracking-tight"
           >
-            One conversation.
+            With one conversation.
           </motion.h2>
 
           {/* Stacked Details */}
-          <div className="flex flex-col gap-1 md:gap-2 max-w-2xl mt-4 md:mt-8">
+          <div className="flex flex-col gap-1 md:gap-2 max-w-2xl mt-4 md:mt-6">
             <motion.p
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -208,7 +208,7 @@ export default function LandingPage() {
       </section>
 
       {/* The Big Reveal - Separate section for drama */}
-      <section className="py-16 md:py-24 px-6 md:px-12 max-w-[1400px] mx-auto">
+      <section className="pt-8 md:pt-12 pb-16 md:pb-24 px-6 md:px-12 max-w-[1400px] mx-auto">
         <motion.div
           ref={workRef}
           initial={{ opacity: 0, y: 80 }}
