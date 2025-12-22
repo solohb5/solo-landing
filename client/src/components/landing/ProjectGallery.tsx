@@ -19,7 +19,7 @@ const projects: Project[] = [
     year: "2024",
     services: "Brand / Web / Copy",
     screenshot: "/jovanny-screenshot.png",
-    url: "https://jovannyjones.com"
+    url: "https://www.theedgeofhonor.com"
   }
 ];
 
