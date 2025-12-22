@@ -183,6 +183,19 @@
     filter: drop-shadow(0 0 40px var(--color-solo-glow));
     transform: scale(1.02);
   }
+
+  /* Let's build - hollow italic on hover */
+  .lets-build-hover {
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .lets-build-hover:hover {
+    color: transparent !important;
+    -webkit-text-stroke: 1px var(--color-solo-accent);
+    text-stroke: 1px var(--color-solo-accent);
+    font-style: italic;
+    letter-spacing: 0.05em;
+  }
 }
 
 @keyframes heartbeat {

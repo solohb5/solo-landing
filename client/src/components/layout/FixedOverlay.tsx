@@ -118,12 +118,7 @@ export function FixedOverlay({ onOpenProject }: FixedOverlayProps) {
         className="fixed top-8 right-8 z-50 cursor-pointer group"
         style={getStyleFor('lets-build')}
       >
-        <span className="font-display text-lg tracking-wide text-solo-text transition-colors"
-           style={{ 
-             color: hoveredId === 'lets-build' ? 'var(--color-solo-accent)' : undefined,
-             textShadow: hoveredId === 'lets-build' ? "0 0 30px var(--color-solo-accent), 0 0 60px var(--color-solo-accent)" : "none",
-           }}
-        >
+        <span className="font-display text-lg tracking-wide text-solo-text lets-build-hover">
           [ let's build ]
         </span>
       </motion.button>
