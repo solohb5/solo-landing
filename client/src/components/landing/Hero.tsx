@@ -27,7 +27,7 @@ export function Hero() {
           <motion.div
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 2.8 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 2.5 }}
             className="overflow-hidden"
           >
             <h1 className="font-body font-extrabold text-[11vw] leading-[0.8] tracking-tight text-solo-text block uppercase">
@@ -40,7 +40,7 @@ export function Hero() {
             <motion.h1 
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 2.9 }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 2.6 }}
               className="font-body font-extrabold text-[11vw] leading-[0.8] tracking-tight text-solo-text block uppercase"
             >
               Websites
@@ -52,7 +52,7 @@ export function Hero() {
             <motion.h1 
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 3.0 }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 2.7 }}
               className="font-body font-extrabold text-[11vw] leading-[0.8] tracking-tight text-solo-text block uppercase"
             >
               That tell
@@ -64,7 +64,7 @@ export function Hero() {
             <motion.h1 
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 3.1 }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 2.8 }}
               className="font-body font-extrabold text-[11vw] leading-[0.8] tracking-tight text-solo-text block uppercase flex items-baseline gap-[2vw]"
             >
               <span>Your</span>
@@ -84,7 +84,7 @@ export function Hero() {
             <motion.div
                initial={{ opacity: 0, scale: 0 }}
                animate={{ opacity: 1, scale: 1 }}
-               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 2.2 }}
+               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 1.9 }}
                className="mb-[1.5vw]"
             >
                <div className="w-[3.5vw] h-[3.5vw] bg-solo-accent animate-heartbeat" />
