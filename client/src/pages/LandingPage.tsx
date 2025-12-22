@@ -162,9 +162,9 @@ export default function LandingPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-body font-extrabold text-[10vw] md:text-[7vw] leading-[0.85] text-solo-text uppercase tracking-tight"
+            className="font-body font-extrabold text-[12vw] md:text-[9vw] leading-[0.85] text-solo-text uppercase tracking-tight"
           >
-            We start with a conversation.
+            One conversation.
           </motion.h2>
 
           {/* Stacked Details */}
