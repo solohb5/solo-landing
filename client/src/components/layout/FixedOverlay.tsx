@@ -19,6 +19,8 @@ export function FixedOverlay({ onOpenProject }: FixedOverlayProps) {
   const opacity = useTransform(scrollY, [0, 100], [1, 0]);
   // Transform pointer-events to prevent interaction when faded out
   const pointerEvents = useTransform(scrollY, (value) => value > 100 ? "none" : "auto");
+  // Page border fades more gradually and never fully disappears
+  const borderOpacity = useTransform(scrollY, [0, 200], [1, 0.25]);
 
   const themes: Theme[] = ["gold", "electric", "deep", "inverted"];
 
@@ -51,10 +53,10 @@ export function FixedOverlay({ onOpenProject }: FixedOverlayProps) {
     <>
       
       {/* Dimmer Overlay - Covers everything when ANY item is hovered */}
-      <motion.div 
-        className="fixed inset-0 bg-black pointer-events-none z-[45]" 
+      <motion.div
+        className="fixed inset-0 bg-black pointer-events-none z-[45]"
         initial={{ opacity: 0 }}
-        animate={{ opacity: hoveredId ? 0.8 : 0 }}
+        animate={{ opacity: hoveredId ? 0.4 : 0 }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       />
 
@@ -81,31 +83,32 @@ export function FixedOverlay({ onOpenProject }: FixedOverlayProps) {
 
         
         {/* Bottom Right: Logo with pulsing square */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 4.0, duration: 1 }}
           className="fixed bottom-8 right-8 z-50 pointer-events-none flex items-center gap-2"
         >
-           <span 
+           <span
              className="font-display font-medium text-2xl md:text-3xl tracking-wide leading-none"
              style={{ color: 'var(--color-solo-text)' }}
            >
              SOLO
            </span>
-           <div 
+           <div
              className="w-5 h-5 md:w-6 md:h-6 bg-solo-accent animate-heartbeat"
            />
         </motion.div>
-
-        {/* Page Border */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2, duration: 1 }}
-          className="fixed inset-3 md:inset-5 border border-solo-rule z-[40] pointer-events-none"
-        />
       </motion.div>
+
+      {/* Page Border - Separate from scroll group, fades but never disappears */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2, duration: 1 }}
+        style={{ opacity: borderOpacity }}
+        className="fixed inset-3 md:inset-5 border border-solo-rule z-[40] pointer-events-none"
+      />
 
       {/* Top Right: Let's build - PERMANENT (Outside opacity group) */}
       <motion.button

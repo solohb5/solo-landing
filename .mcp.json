@@ -1,0 +1,27 @@
+{
+  "mcpServers": {
+    "desktop-commander": {
+      "command": "npx",
+      "args": ["-y", "@wonderwhy-er/desktop-commander"]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
+    }
+  },
+  "_comments": {
+    "desktop-commander": "File system access, terminal control, process management",
+    "optional_servers": {
+      "context7": "Up-to-date library docs - prevents API hallucination",
+      "github": "PR creation, code review, repo management",
+      "sequential-thinking": "Complex multi-step task planning"
+    },
+    "setup_instructions": [
+      "1. Copy this file to your project root as .mcp.json",
+      "2. Add servers you need from optional_servers",
+      "3. Configure API keys in environment variables",
+      "4. Run: claude mcp list to verify"
+    ]
+  }
+}
+

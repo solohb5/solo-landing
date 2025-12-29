@@ -10,6 +10,7 @@ import { Preloader } from "@/components/ui/Preloader";
 import { FixedOverlay } from "@/components/layout/FixedOverlay";
 import { ProjectModal } from "@/components/layout/ProjectModal";
 import { Marquee } from "@/components/landing/Marquee";
+import { TransitionalDifferent } from "@/components/landing/TransitionalDifferent";
 import { motion } from "framer-motion";
 
 import { SpotlightText } from "@/components/landing/SpotlightText";
@@ -60,9 +61,9 @@ export default function LandingPage() {
       
       <Hero />
       
-      <ContentSection number="01">
+      <ContentSection number="01" noRule>
         <div className="flex flex-col gap-12 md:gap-16">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -84,7 +85,7 @@ export default function LandingPage() {
              >
                For speakers, coaches, and creators, there's no logo to hide behind. Your audience follows YOU. They buy from YOU. They trust your face, your voice, your story.
              </motion.p>
-             
+
              <motion.p
                initial={{ opacity: 0, y: 20 }}
                whileInView={{ opacity: 1, y: 0 }}
@@ -97,6 +98,9 @@ export default function LandingPage() {
           </div>
         </div>
       </ContentSection>
+
+      {/* Transitional Statement */}
+      <TransitionalDifferent />
 
       {/* Section 02 - Custom Layout */}
       <section className="py-24 md:py-40 px-6 md:px-12 max-w-[1400px] mx-auto">
@@ -139,7 +143,7 @@ export default function LandingPage() {
            </motion.h2>
 
            {/* Horizontal Rule */}
-           <motion.div 
+           <motion.div
               initial={{ scaleX: 0, originX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}

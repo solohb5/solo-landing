@@ -1,0 +1,24 @@
+# Personal Overrides Template
+
+<!-- 
+INSTRUCTIONS:
+1. Copy this file to CLAUDE.local.md
+2. Add to .gitignore: CLAUDE.local.md
+3. Add your personal preferences below
+-->
+
+## My Preferences
+- [Your communication style preferences]
+- [Your IDE/editor setup notes]
+- [Personal shortcuts or workflows]
+
+## Environment
+- API keys location: [where you store them]
+- Local services: [what you run locally]
+
+## Notes
+- [Anything specific to your machine/setup]
+
+---
+*This file is gitignored. Keep machine-specific config here.*
+

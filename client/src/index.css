@@ -128,10 +128,11 @@
   /* STORY - Hollow outline that fills on hover */
   .story-hollow {
     color: transparent;
-    -webkit-text-stroke: 2px var(--color-solo-accent);
-    text-stroke: 2px var(--color-solo-accent);
+    -webkit-text-stroke: 3px var(--color-solo-accent);
+    text-stroke: 3px var(--color-solo-accent);
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
+    filter: drop-shadow(0 0 8px var(--color-solo-glow));
   }
 
   .story-hollow::before {
@@ -147,9 +148,9 @@
   }
 
   .story-hollow:hover {
-    -webkit-text-stroke: 2px var(--color-solo-accent);
+    -webkit-text-stroke: 3px var(--color-solo-accent);
     transform: scale(1.02);
-    filter: drop-shadow(0 0 30px var(--color-solo-glow));
+    filter: drop-shadow(0 0 40px var(--color-solo-glow));
   }
 
   .story-hollow:hover::before {
@@ -158,8 +159,8 @@
 
   /* Mobile: Scroll-triggered reveal */
   .story-hollow.story-revealed {
-    -webkit-text-stroke: 2px var(--color-solo-accent);
-    filter: drop-shadow(0 0 30px var(--color-solo-glow));
+    -webkit-text-stroke: 3px var(--color-solo-accent);
+    filter: drop-shadow(0 0 40px var(--color-solo-glow));
   }
 
   .story-hollow.story-revealed::before {
@@ -169,10 +170,11 @@
   /* WORK - Hollow outline that fills on hover */
   .work-hollow {
     color: transparent;
-    -webkit-text-stroke: 2px var(--color-solo-accent);
-    text-stroke: 2px var(--color-solo-accent);
+    -webkit-text-stroke: 2.5px var(--color-solo-accent);
+    text-stroke: 2.5px var(--color-solo-accent);
     transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     font-style: italic;
+    filter: drop-shadow(0 0 6px var(--color-solo-glow));
   }
 
   /* Fill on group hover (both lines together) */
@@ -180,9 +182,128 @@
     color: var(--color-solo-accent);
     -webkit-text-stroke: 0;
     text-stroke: 0;
-    filter: drop-shadow(0 0 40px var(--color-solo-glow));
+    filter: drop-shadow(0 0 50px var(--color-solo-glow));
     transform: scale(1.02);
   }
+
+  /* DIFFERENT - Breathing glow synchronized with heartbeat */
+  .different-shimmer {
+    position: relative;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--color-solo-accent);
+    text-stroke: 2px var(--color-solo-accent);
+    opacity: 0.4;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                color 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                -webkit-text-stroke 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .different-shimmer.revealed {
+    opacity: 1;
+    color: var(--color-solo-accent);
+    -webkit-text-stroke: 0;
+    text-stroke: 0;
+    animation: different-heartbeat 1.2s ease-in-out infinite;
+  }
+
+  @keyframes different-heartbeat {
+    0%, 100% {
+      filter: drop-shadow(0 0 30px var(--color-solo-glow));
+      transform: scale(1);
+    }
+    50% {
+      filter: drop-shadow(0 0 60px var(--color-solo-glow));
+      transform: scale(1.005);
+    }
+  }
+
+  /* 
+  ═══════════════════════════════════════════════════════════════
+  ALTERNATIVE EFFECTS FOR "DIFFERENT"
+  ═══════════════════════════════════════════════════════════════
+  
+  Current: BREATHING GLOW (synced with site heartbeat at 1.2s)
+  
+  ───────────────────────────────────────────────────────────────
+  OPTION A: GRADIENT SHIMMER SWEEP
+  Liquid metal shimmer on reveal, then static
+  ───────────────────────────────────────────────────────────────
+  
+  .different-shimmer.revealed {
+    opacity: 1;
+    -webkit-text-stroke: 0;
+    text-stroke: 0;
+    background: linear-gradient(
+      120deg,
+      var(--color-solo-accent) 0%,
+      var(--color-solo-text) 30%,
+      var(--color-solo-accent) 50%,
+      var(--color-solo-text) 70%,
+      var(--color-solo-accent) 100%
+    );
+    background-size: 300% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer-sweep 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    filter: drop-shadow(0 0 40px var(--color-solo-glow));
+  }
+
+  @keyframes shimmer-sweep {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -100% 0;
+      background: var(--color-solo-accent);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+  
+  ───────────────────────────────────────────────────────────────
+  OPTION B: LIQUID METAL MORPH
+  Text liquefies on reveal, then static
+  ───────────────────────────────────────────────────────────────
+  
+  .different-shimmer.revealed {
+    opacity: 1;
+    -webkit-text-stroke: 0;
+    text-stroke: 0;
+    background: linear-gradient(
+      45deg,
+      var(--color-solo-accent),
+      var(--color-solo-text),
+      var(--color-solo-accent)
+    );
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: liquid-morph 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    filter: drop-shadow(0 0 40px var(--color-solo-glow));
+  }
+
+  @keyframes liquid-morph {
+    0% {
+      background-position: 0% 50%;
+      filter: blur(8px) drop-shadow(0 0 40px var(--color-solo-glow));
+      letter-spacing: 0.5em;
+    }
+    60% {
+      background-position: 100% 50%;
+      filter: blur(0px) drop-shadow(0 0 50px var(--color-solo-glow));
+    }
+    100% {
+      background-position: 50% 50%;
+      background: var(--color-solo-accent);
+      filter: drop-shadow(0 0 40px var(--color-solo-glow));
+      letter-spacing: normal;
+    }
+  }
+  
+  */
 
   /* Let's build - hollow italic on hover */
   .lets-build-hover {
